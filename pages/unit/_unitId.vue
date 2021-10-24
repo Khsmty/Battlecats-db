@@ -29,6 +29,7 @@ export default {
       'https://script.google.com/macros/s/AKfycbxZeitsl4FpuENG7VWcv-av6owR2NM6AONqfziHFZcTjAqcVTPs7isPjmZzBdhu8iY/exec',
       {
         params: {
+          type: 'unit-status',
           id: params.unitId,
         },
       }

@@ -1,10 +1,6 @@
 <template>
   <v-app dark>
-    <v-navigation-drawer
-      v-model="drawer"
-      fixed
-      app
-    >
+    <v-navigation-drawer v-model="drawer" fixed app>
       <v-list nav>
         <v-list-item
           v-for="(item, i) in items"
@@ -22,12 +18,15 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-    <v-app-bar
-      fixed
-      app
-    >
+    <v-app-bar elevate-on-scroll fixed app>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-toolbar-title style="cursor: pointer" @click="$router.push('/')" v-text="title" />
+      <v-toolbar-title style="cursor: pointer" @click="$router.push('/')"
+        >にゃんこ大戦争db</v-toolbar-title
+      >
+      <v-spacer />
+      <v-btn icon @click="toggleTheme()"
+        ><v-icon>mdi-brightness-6</v-icon></v-btn
+      >
     </v-app-bar>
     <v-main>
       <v-container>
@@ -39,23 +38,36 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       drawer: false,
       items: [
         {
           icon: 'mdi-apps',
           title: 'Welcome',
-          to: '/'
+          to: '/',
         },
         {
           icon: 'mdi-chart-bubble',
           title: 'Inspire',
-          to: '/inspire'
-        }
+          to: '/inspire',
+        },
       ],
-      title: 'にゃんこ大戦争db'
     }
-  }
+  },
+  mounted() {
+    const theme = localStorage.getItem('useDarkTheme')
+    if (theme && theme === 'true') {
+      this.$vuetify.theme.dark = true
+    } else {
+      this.$vuetify.theme.dark = false
+    }
+  },
+  methods: {
+    toggleTheme() {
+      this.$vuetify.theme.dark = !this.$vuetify.theme.dark
+      localStorage.setItem('useDarkTheme', this.$vuetify.theme.dark.toString())
+    },
+  },
 }
 </script>
