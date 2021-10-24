@@ -8,6 +8,7 @@
         label="キャラクターを検索..."
         single-line
         hide-details
+        class="unit-search-box"
       ></v-text-field>
       <v-data-table
         :headers="headers"
