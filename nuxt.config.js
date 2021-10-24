@@ -18,7 +18,7 @@ export default {
   },
 
   // Loading bar
-  loading: { color: '#005eff' },
+  loading: { color: '#1976D2' },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
@@ -53,7 +53,7 @@ export default {
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
     manifest: {
-      lang: 'en',
+      lang: 'ja',
     },
   },
 
