@@ -2,6 +2,13 @@
   <v-row justify="center" align="center">
     <v-col cols="12">
       <h1 class="page-title">味方キャラステータス</h1>
+      <v-text-field
+        v-model="search"
+        append-icon="mdi-magnify"
+        label="キャラクターを検索..."
+        single-line
+        hide-details
+      ></v-text-field>
       <v-data-table
         :headers="headers"
         :items="items"
@@ -11,6 +18,7 @@
           showFirstLastPage: true,
         }"
         :loading="loading"
+        :search="search"
         multi-sort
         locale="ja-JP"
         loading-text="読み込み中... しばらくお待ちください。"
@@ -28,6 +36,7 @@ export default {
   data() {
     return {
       loading: false,
+      search: '',
       headers: [
         { text: 'No.', value: 'no' },
         { text: 'ランク', value: 'rank' },
