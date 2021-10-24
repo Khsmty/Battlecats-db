@@ -1,7 +1,6 @@
 <template>
-  <v-row justify="center" align="center">
-    <v-col cols="12" sm="8" md="6">
-      製作中です...
-    </v-col>
-  </v-row>
+  <p>
+    トップページは製作中です。<br />
+    メニューから閲覧したいページを選択してください。
+  </p>
 </template>

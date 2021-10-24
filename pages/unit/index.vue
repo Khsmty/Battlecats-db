@@ -1,5 +1,5 @@
 <template>
-  <v-row justify="center" align="center">
+  <v-row justify="center">
     <v-col cols="12">
       <h1 class="page-title">味方キャラステータス</h1>
       <v-text-field
@@ -24,8 +24,13 @@
         locale="ja-JP"
         loading-text="読み込み中... しばらくお待ちください。"
         no-data-text="データがありません。"
-        dense
-      ></v-data-table>
+      >
+        <template #[`item.name`]="{ item }">
+          <nuxt-link :to="'/unit/' + item.no.slice(0, 3)" class="list-link">{{
+            item.name
+          }}</nuxt-link>
+        </template>
+      </v-data-table>
     </v-col>
   </v-row>
 </template>

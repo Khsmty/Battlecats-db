@@ -17,6 +17,24 @@
           </v-list-item-content>
         </v-list-item>
       </v-list>
+      <template #append>
+        <v-list nav>
+          <v-list-item
+            v-for="(bItem, i) in bottomItems"
+            :key="i"
+            :to="bItem.to"
+            router
+            exact
+          >
+            <v-list-item-action>
+              <v-icon>{{ bItem.icon }}</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title v-text="bItem.title" />
+            </v-list-item-content>
+          </v-list-item>
+        </v-list>
+      </template>
     </v-navigation-drawer>
     <v-app-bar elevate-on-scroll fixed app>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
@@ -51,6 +69,13 @@ export default {
           icon: 'mdi-book',
           title: '味方キャラクター',
           to: '/unit',
+        },
+      ],
+      bottomItems: [
+        {
+          icon: 'mdi-information',
+          title: 'このサイトについて',
+          to: '/about',
         },
       ],
     }
