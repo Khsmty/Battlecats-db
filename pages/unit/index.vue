@@ -116,7 +116,7 @@ export default {
         path: this.$route.path,
         query: { ...this.$route.query, lv: this.charaLv },
       })
-      this.$router.reload()
+      this.$router.$forceUpdate()
     },
   },
 }
