@@ -11,9 +11,8 @@
   <v-row v-else justify="center">
     <v-col cols="12">
       <h1 class="page-title">
-        No.{{ unitData[0].meta.no.slice(0, 3) }}・{{
-          unitData.map((d) => d.meta.name).join(' / ')
-        }}
+        No.{{ unitData[0].meta.no.slice(0, 3) }}
+        {{ unitData.map((d) => d.meta.name).join(' / ') }}
       </h1>
     </v-col>
     <v-col
@@ -65,6 +64,13 @@ export default {
     return {
       loading: true,
       unitData: [],
+    }
+  },
+  head() {
+    return {
+      title: `No.${this.$route.params.unitNo} ${this.unitData
+        .map((d) => d.meta.name)
+        .join(' / ')} - 味方キャラクター`,
     }
   },
   async mounted() {

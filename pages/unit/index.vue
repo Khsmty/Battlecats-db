@@ -75,6 +75,11 @@ export default {
       items: [],
     }
   },
+  head() {
+    return {
+      title: '味方キャラクター一覧',
+    }
+  },
   async mounted() {
     try {
       const response = await Axios.get(

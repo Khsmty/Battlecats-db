@@ -4,3 +4,13 @@
     メニューから閲覧したいページを選択してください。
   </p>
 </template>
+
+<script>
+export default {
+  head() {
+    return {
+      title: 'ホーム'
+    }
+  }
+}
+</script>

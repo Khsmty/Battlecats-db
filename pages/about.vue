@@ -18,3 +18,13 @@
     </v-col>
   </v-row>
 </template>
+
+<script>
+export default {
+  head() {
+    return {
+      title: 'このサイトについて'
+    }
+  }
+}
+</script>
