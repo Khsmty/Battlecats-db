@@ -9,7 +9,6 @@
     "
     max-height="50"
     max-width="70"
-    lazy-src="/lazy.png"
   />
 </template>
 

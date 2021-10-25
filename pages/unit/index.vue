@@ -10,6 +10,18 @@
         hide-details
         class="unit-search-box"
       ></v-text-field>
+
+      <v-row justify="right">
+        <v-col cols="6" sm="3" md="2">
+          <v-text-field
+            v-model="charaLv"
+            prefix="Lv."
+            append-outer-icon="mdi-check"
+            @click:append-outer="lvChange()"
+          />
+        </v-col>
+      </v-row>
+
       <v-data-table
         :headers="headers"
         :items="items"
@@ -46,6 +58,7 @@ export default {
     return {
       loading: true,
       search: '',
+      charaLv: 30,
       headers: [
         { text: 'No.', value: 'no' },
         { text: 'ランク', value: 'rank' },
@@ -82,8 +95,12 @@ export default {
   },
   async mounted() {
     try {
+      const charaLv = this.$route.query.lv
+
+      this.charaLv = charaLv
+
       const response = await Axios.get(
-        'https://script.google.com/macros/s/AKfycbzuwyRlArUbcICxCjN5YfU5O8UnNimTWyO8CiIpdcUshEfK-4wkIk-9TKWhVRkLDQgPxg/exec?level=30'
+        `https://script.google.com/macros/s/AKfycbzuwyRlArUbcICxCjN5YfU5O8UnNimTWyO8CiIpdcUshEfK-4wkIk-9TKWhVRkLDQgPxg/exec?level=${charaLv}`
       )
       const units = response.data
 
@@ -92,6 +109,15 @@ export default {
       alert(`エラーが発生しました。\n${e}`)
     }
     this.loading = false
+  },
+  methods: {
+    lvChange() {
+      this.$router.replace({
+        path: this.$route.path,
+        query: { ...this.$route.query, lv: this.charaLv },
+      })
+      this.$router.reload()
+    },
   },
 }
 </script>
