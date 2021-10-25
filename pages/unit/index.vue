@@ -17,7 +17,7 @@
             v-model="charaLv"
             prefix="Lv."
             append-outer-icon="mdi-check"
-            @click:append-outer="lvChange()"
+            @click:append-outer="lvChange"
           />
         </v-col>
       </v-row>
@@ -95,7 +95,7 @@ export default {
   },
   async mounted() {
     try {
-      const charaLv = this.$route.query.lv
+      const charaLv = this.$route.query.lv || 30
 
       this.charaLv = charaLv
 
