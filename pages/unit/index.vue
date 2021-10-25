@@ -22,9 +22,12 @@
         :search="search"
         multi-sort
         locale="ja-JP"
-        loading-text="読み込み中... しばらくお待ちください。"
+        loading-text="データを読み込んでいます..."
         no-data-text="データがありません。"
       >
+        <template #[`item.img`]="{ item }">
+          <UnitImg :no="item.no" />
+        </template>
         <template #[`item.name`]="{ item }">
           <nuxt-link :to="'/unit/' + item.no.slice(0, 3)" class="list-link">{{
             item.name
@@ -41,11 +44,16 @@ import Axios from 'axios'
 export default {
   data() {
     return {
-      loading: false,
+      loading: true,
       search: '',
       headers: [
         { text: 'No.', value: 'no' },
         { text: 'ランク', value: 'rank' },
+        {
+          text: '画像',
+          sortable: false,
+          value: 'img',
+        },
         {
           text: 'キャラクター名',
           align: 'start',
@@ -68,15 +76,13 @@ export default {
     }
   },
   async mounted() {
-    this.loading = true
     try {
       const response = await Axios.get(
-        'https://script.google.com/macros/s/AKfycbzuwyRlArUbcICxCjN5YfU5O8UnNimTWyO8CiIpdcUshEfK-4wkIk-9TKWhVRkLDQgPxg/exec?type=unit-list&level=30'
+        'https://script.google.com/macros/s/AKfycbzuwyRlArUbcICxCjN5YfU5O8UnNimTWyO8CiIpdcUshEfK-4wkIk-9TKWhVRkLDQgPxg/exec?level=30'
       )
       const units = response.data
 
       this.items = units
-      this.total = units.length
     } catch (e) {
       alert(`エラーが発生しました。\n${e}`)
     }

@@ -21,9 +21,7 @@ export default {
   loading: { color: '#1976D2' },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [
-    './assets/style.css',
-  ],
+  css: ['./assets/style.css'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [],
@@ -54,6 +52,15 @@ export default {
   pwa: {
     manifest: {
       lang: 'ja',
+      theme_color: '#1976D2',
+      background_color: '#1a1a1a',
+      display: 'standalone',
+      start_url: '/',
+      scope: '/',
+      name: 'にゃんこ大戦争db',
+      short_name: 'にゃんこ大戦争db',
+      title: 'にゃんこ大戦争db',
+      description: 'にゃんこ大戦争のデータをまとめています。',
     },
   },
 
