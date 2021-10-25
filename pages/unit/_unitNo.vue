@@ -10,6 +10,9 @@
   </v-row>
   <v-row v-else justify="center">
     <v-col cols="12">
+      <v-btn class="page-title" to="/unit" color="primary" nuxt rounded>
+        <v-icon>mdi-arrow-left</v-icon>&nbsp;一覧ページへ
+      </v-btn>
       <h1 class="page-title">
         No.{{ unitData[0].meta.no.slice(0, 3) }}
         {{ unitData.map((d) => d.meta.name).join(' / ') }}
