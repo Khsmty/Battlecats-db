@@ -16,8 +16,7 @@
           <v-text-field
             v-model="charaLv"
             prefix="Lv."
-            append-outer-icon="mdi-check"
-            @click:append-outer="lvChange"
+            @change="fetchData"
           />
         </v-col>
       </v-row>
@@ -93,30 +92,23 @@ export default {
       title: '味方キャラクター一覧',
     }
   },
-  async mounted() {
-    try {
-      const charaLv = this.$route.query.lv || 30
-
-      this.charaLv = charaLv
-
-      const response = await Axios.get(
-        `https://script.google.com/macros/s/AKfycbzuwyRlArUbcICxCjN5YfU5O8UnNimTWyO8CiIpdcUshEfK-4wkIk-9TKWhVRkLDQgPxg/exec?level=${charaLv}`
-      )
-      const units = response.data
-
-      this.items = units
-    } catch (e) {
-      alert(`エラーが発生しました。\n${e}`)
-    }
-    this.loading = false
+  mounted() {
+    this.fetchData()
   },
   methods: {
-    lvChange() {
-      this.$router.replace({
-        path: this.$route.path,
-        query: { ...this.$route.query, lv: this.charaLv },
-      })
-      this.$router.$forceUpdate()
+    async fetchData() {
+      this.loading = true
+      try {
+        const response = await Axios.get(
+          `https://script.google.com/macros/s/AKfycbzuwyRlArUbcICxCjN5YfU5O8UnNimTWyO8CiIpdcUshEfK-4wkIk-9TKWhVRkLDQgPxg/exec?level=${this.charaLv}`
+        )
+        const units = response.data
+
+        this.items = units
+      } catch (e) {
+        alert(`エラーが発生しました。\n${e}`)
+      }
+      this.loading = false
     },
   },
 }
