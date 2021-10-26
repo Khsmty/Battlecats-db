@@ -32,7 +32,7 @@
         <v-card-text>
           <v-row>
             <v-col cols="12" sm="3" md="2">
-              <UnitImg :no="result.meta.no.slice(0, 3)" />
+              <UnitImg :no="result.meta.no" />
             </v-col>
             <v-col
               v-for="status of result.status"
