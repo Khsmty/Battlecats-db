@@ -72,6 +72,8 @@ export default {
 @media screen and (min-width: 501px) {
   .v-dialog {
     height: auto;
+  }
+  .v-dialog--fullscreen>.v-card {
     min-height: 600px;
   }
 }
