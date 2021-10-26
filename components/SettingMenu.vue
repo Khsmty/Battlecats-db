@@ -72,6 +72,7 @@ export default {
 @media screen and (min-width: 501px) {
   .v-dialog {
     height: auto;
+    min-height: 600px;
   }
 }
 </style>
