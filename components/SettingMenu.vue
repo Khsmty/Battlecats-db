@@ -10,7 +10,7 @@
         <v-icon>mdi-cog</v-icon>
       </v-btn>
     </template>
-    <v-card>
+    <v-card class="setting-card">
       <v-toolbar color="primary">
         <v-btn icon @click="dialog = false">
           <v-icon>mdi-close</v-icon>
@@ -73,7 +73,7 @@ export default {
   .v-dialog {
     height: auto;
   }
-  .v-dialog--fullscreen>.v-card {
+  .setting-card {
     min-height: 600px;
   }
 }
