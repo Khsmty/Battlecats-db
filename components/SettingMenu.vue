@@ -1,0 +1,77 @@
+<template>
+  <v-dialog
+    v-model="dialog"
+    hide-overlay
+    transition="dialog-bottom-transition"
+    fullscreen
+  >
+    <template #activator="{ on, attrs }">
+      <v-btn icon v-bind="attrs" v-on="on">
+        <v-icon>mdi-cog</v-icon>
+      </v-btn>
+    </template>
+    <v-card>
+      <v-toolbar color="primary">
+        <v-btn icon @click="dialog = false">
+          <v-icon>mdi-close</v-icon>
+        </v-btn>
+        <v-toolbar-title>設定</v-toolbar-title>
+      </v-toolbar>
+      <v-list three-line subheader>
+        <v-subheader>一般</v-subheader>
+        <v-list-item>
+          <v-list-item-action>
+            <v-checkbox v-model="darkMode" @change="toggleTheme"></v-checkbox>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>ダークモード</v-list-item-title>
+            <v-list-item-subtitle>
+              画面のちらつきを防止し、消費電力を抑えます。
+            </v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </v-card>
+  </v-dialog>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      dialog: false,
+      darkMode: true,
+    }
+  },
+  mounted() {
+    const theme = localStorage.getItem('darkMode')
+    if (theme && theme === 'false') {
+      this.$vuetify.theme.dark = false
+    } else {
+      this.$vuetify.theme.dark = true
+    }
+    this.darkMode = this.$vuetify.theme.dark
+  },
+  methods: {
+    toggleTheme() {
+      this.$vuetify.theme.dark = !this.$vuetify.theme.dark
+      localStorage.setItem('darkMode', this.$vuetify.theme.dark.toString())
+    },
+  },
+}
+</script>
+
+<style>
+.v-dialog {
+  position: initial;
+  max-width: 500px;
+  margin: 0;
+  height: 100%;
+}
+
+@media screen and (min-width: 501px) {
+  .v-dialog {
+    height: auto;
+  }
+}
+</style>

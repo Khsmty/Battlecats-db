@@ -42,9 +42,7 @@
         >にゃんこ大戦争db</v-toolbar-title
       >
       <v-spacer />
-      <v-btn icon @click="toggleTheme()"
-        ><v-icon>mdi-brightness-6</v-icon></v-btn
-      >
+      <SettingMenu />
     </v-app-bar>
     <v-main>
       <v-container>
@@ -79,20 +77,6 @@ export default {
         },
       ],
     }
-  },
-  mounted() {
-    const theme = localStorage.getItem('useDarkTheme')
-    if (theme && theme === 'false') {
-      this.$vuetify.theme.dark = false
-    } else {
-      this.$vuetify.theme.dark = true
-    }
-  },
-  methods: {
-    toggleTheme() {
-      this.$vuetify.theme.dark = !this.$vuetify.theme.dark
-      localStorage.setItem('useDarkTheme', this.$vuetify.theme.dark.toString())
-    },
   },
 }
 </script>
