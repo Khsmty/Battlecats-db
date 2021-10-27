@@ -40,22 +40,23 @@ export default {
   data() {
     return {
       dialog: false,
-      darkMode: true,
+      darkMode: false,
     }
   },
   mounted() {
-    const theme = localStorage.getItem('darkMode')
-    if (theme && theme === 'false') {
-      this.$vuetify.theme.dark = false
-    } else {
+    const theme = localStorage.getItem('theme')
+    if (theme && theme === 'dark') {
       this.$vuetify.theme.dark = true
+      this.darkMode = true
+    } else {
+      this.$vuetify.theme.dark = false
     }
-    this.darkMode = this.$vuetify.theme.dark
   },
   methods: {
     toggleTheme() {
+      const newTheme = this.$vuetify.theme.dark ? 'light' : 'dark'
       this.$vuetify.theme.dark = !this.$vuetify.theme.dark
-      localStorage.setItem('darkMode', this.$vuetify.theme.dark.toString())
+      localStorage.setItem('theme', newTheme)
     },
   },
 }
