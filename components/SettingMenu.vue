@@ -30,8 +30,8 @@
             </v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
-        <v-list-item @click="backupDialog = true">
-          <v-list-item-content>
+        <v-list-item>
+          <v-list-item-content @click="backupDialog = !backupDialog">
             <v-list-item-title>バックアップと復元</v-list-item-title>
             <v-list-item-subtitle>
               ブラウザに保存したデータをバックアップしたり復元したりできます。
@@ -41,26 +41,28 @@
       </v-list>
     </v-card>
   </v-dialog>
-  <v-dialog
-    v-model="backupDialog"
-    hide-overlay
-    transition="dialog-bottom-transition"
-    fullscreen
-  >
-    <v-card class="setting-card">
-      <v-toolbar color="primary">
-        <v-btn icon @click="backupDialog = false">
-          <v-icon>mdi-close</v-icon>
-        </v-btn>
-        <v-toolbar-title>バックアップと復元</v-toolbar-title>
-      </v-toolbar>
-      <v-list three-line subheader>
-        <v-subheader>バックアップ</v-subheader>
-        <v-list-item>
-        </v-list-item>
-      </v-list>
-    </v-card>
-  </v-dialog>
+  <template>
+    <v-dialog
+      v-model="backupDialog"
+      hide-overlay
+      transition="dialog-bottom-transition"
+      fullscreen
+    >
+      <v-card class="setting-card">
+        <v-toolbar color="primary">
+          <v-btn icon @click="backupDialog = !backupDialog">
+            <v-icon>mdi-close</v-icon>
+          </v-btn>
+          <v-toolbar-title>バックアップと復元</v-toolbar-title>
+        </v-toolbar>
+        <v-list three-line subheader>
+          <v-subheader>バックアップ</v-subheader>
+          <v-list-item>
+          </v-list-item>
+        </v-list>
+      </v-card>
+    </v-dialog>
+  </template>
 </template>
 
 <script>
