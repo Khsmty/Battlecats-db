@@ -15,6 +15,10 @@
         <v-col cols="6" sm="3" md="2">
           <v-text-field
             v-model="charaLv"
+            outlined
+            dense
+            :rules="rules"
+            hide-details="auto"
             prefix="Lv."
             @change="fetchData"
           />

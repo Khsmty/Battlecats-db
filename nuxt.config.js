@@ -68,7 +68,6 @@ export default {
   vuetify: {
     customVariables: [],
     theme: {
-      dark: true,
       themes: {
         dark: {
           primary: colors.blue.darken2,

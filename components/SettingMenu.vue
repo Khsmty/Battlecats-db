@@ -30,39 +30,43 @@
             </v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
-        <v-list-item>
-          <v-list-item-content @click="backupDialog = !backupDialog">
+        <v-list-item @click="backupDialog = !backupDialog">
+          <v-list-item-content>
             <v-list-item-title>バックアップと復元</v-list-item-title>
             <v-list-item-subtitle>
               ブラウザに保存したデータをバックアップしたり復元したりできます。
             </v-list-item-subtitle>
           </v-list-item-content>
+          <v-dialog
+            v-model="backupDialog"
+            hide-overlay
+            transition="dialog-bottom-transition"
+            fullscreen
+          >
+            <v-card class="setting-card">
+              <v-toolbar color="primary">
+                <v-btn icon @click="backupDialog = !backupDialog">
+                  <v-icon>mdi-close</v-icon>
+                </v-btn>
+                <v-toolbar-title>バックアップと復元</v-toolbar-title>
+              </v-toolbar>
+              <v-list three-line subheader>
+                <v-subheader>バックアップ</v-subheader>
+                <v-list-item>
+                  <v-textarea
+                    outlined
+                    name="input-7-4"
+                    label="Outlined textarea"
+                    value="localStorageDatas"
+                  />
+                </v-list-item>
+              </v-list>
+            </v-card>
+          </v-dialog>
         </v-list-item>
       </v-list>
     </v-card>
   </v-dialog>
-  <template>
-    <v-dialog
-      v-model="backupDialog"
-      hide-overlay
-      transition="dialog-bottom-transition"
-      fullscreen
-    >
-      <v-card class="setting-card">
-        <v-toolbar color="primary">
-          <v-btn icon @click="backupDialog = !backupDialog">
-            <v-icon>mdi-close</v-icon>
-          </v-btn>
-          <v-toolbar-title>バックアップと復元</v-toolbar-title>
-        </v-toolbar>
-        <v-list three-line subheader>
-          <v-subheader>バックアップ</v-subheader>
-          <v-list-item>
-          </v-list-item>
-        </v-list>
-      </v-card>
-    </v-dialog>
-  </template>
 </template>
 
 <script>
