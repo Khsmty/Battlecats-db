@@ -37,7 +37,7 @@
           fullscreen
         >
           <template #activator="{ on, attrs }">
-            <v-list-item>
+            <v-list-item v-bind="attrs" v-on="on">
               <v-list-item-content>
                 <v-list-item-title>バックアップと復元</v-list-item-title>
                 <v-list-item-subtitle>
