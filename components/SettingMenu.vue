@@ -26,40 +26,38 @@
           <v-list-item-content>
             <v-list-item-title>ダークモード</v-list-item-title>
             <v-list-item-subtitle>
-              画面のちらつきを防止し、消費電力を抑えます。
+              画面のちらつきを防止し、消費電力を抑えることができます。
             </v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
-        <v-dialog
-          v-model="dialog"
-          hide-overlay
-          transition="dialog-bottom-transition"
-          fullscreen
-        >
-          <template #activator="{ on, attrs }">
-            <v-list-item v-bind="attrs" v-on="on">
-              <v-list-item-content>
-                <v-list-item-title>バックアップと復元</v-list-item-title>
-                <v-list-item-subtitle>
-                  ブラウザに保存したデータをバックアップしたり復元したりできます。
-                </v-list-item-subtitle>
-              </v-list-item-content>
-            </v-list-item>
-          </template>
-          <v-card class="setting-card">
-            <v-toolbar color="primary">
-              <v-btn icon @click="dialog = false">
-                <v-icon>mdi-close</v-icon>
-              </v-btn>
-              <v-toolbar-title>バックアップと復元</v-toolbar-title>
-            </v-toolbar>
-            <v-list three-line subheader>
-              <v-subheader>バックアップ</v-subheader>
-              <v-list-item>
-              </v-list-item>
-            </v-list>
-          </v-card>
-        </v-dialog>
+        <v-list-item @click="backupDialog = true">
+          <v-list-item-content>
+            <v-list-item-title>バックアップと復元</v-list-item-title>
+            <v-list-item-subtitle>
+              ブラウザに保存したデータをバックアップしたり復元したりできます。
+            </v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </v-card>
+  </v-dialog>
+  <v-dialog
+    v-model="backupDialog"
+    hide-overlay
+    transition="dialog-bottom-transition"
+    fullscreen
+  >
+    <v-card class="setting-card">
+      <v-toolbar color="primary">
+        <v-btn icon @click="backupDialog = false">
+          <v-icon>mdi-close</v-icon>
+        </v-btn>
+        <v-toolbar-title>バックアップと復元</v-toolbar-title>
+      </v-toolbar>
+      <v-list three-line subheader>
+        <v-subheader>バックアップ</v-subheader>
+        <v-list-item>
+        </v-list-item>
       </v-list>
     </v-card>
   </v-dialog>
@@ -70,6 +68,7 @@ export default {
   data() {
     return {
       dialog: false,
+      backupDialog: false,
       darkMode: false,
     }
   },
