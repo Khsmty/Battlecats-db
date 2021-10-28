@@ -14,25 +14,25 @@
         <v-icon>mdi-arrow-left</v-icon>&nbsp;一覧ページへ
       </v-btn>
       <h1 class="page-title">
-        No.{{ unitData[0].meta.no.slice(0, 3) }}
+        No.{{ unitData[0].meta.id.slice(0, 3) }}
         {{ unitData.map((d) => d.meta.name).join(' / ') }}
       </h1>
     </v-col>
     <v-col
       v-for="result of unitData"
-      :key="result.meta.no"
+      :key="result.meta.id"
       cols="12"
       sm="10"
       md="9"
     >
       <v-card>
         <v-card-title class="headline">
-          {{ result.meta.no }} {{ result.meta.name }}
+          {{ result.meta.id }} {{ result.meta.name }}
         </v-card-title>
         <v-card-text>
           <v-row>
             <v-col cols="12" sm="3" md="2">
-              <UnitImg :no="result.meta.no" />
+              <UnitImg :id="result.meta.id" />
             </v-col>
             <v-col
               v-for="status of result.status"
@@ -71,19 +71,19 @@ export default {
   },
   head() {
     return {
-      title: `No.${this.$route.params.unitNo} ${this.unitData
+      title: `No.${this.$route.params.unitId} ${this.unitData
         .map((d) => d.meta.name)
         .join(' / ')} - 味方キャラクター`,
     }
   },
   async mounted() {
     try {
-      if (String(this.$route.params.unitNo).length !== 3) {
+      if (String(this.$route.params.unitId).length !== 3) {
         this.$nuxt.error({ statusCode: 404 })
       }
 
       const response = await Axios.get(
-        `https://script.google.com/macros/s/AKfycbzuwyRlArUbcICxCjN5YfU5O8UnNimTWyO8CiIpdcUshEfK-4wkIk-9TKWhVRkLDQgPxg/exec?type=detail&id=${this.$route.params.unitNo}&level=30`
+        `https://script.google.com/macros/s/AKfycbzuwyRlArUbcICxCjN5YfU5O8UnNimTWyO8CiIpdcUshEfK-4wkIk-9TKWhVRkLDQgPxg/exec?type=detail&id=${this.$route.params.unitId}&level=30`
       )
       const results = response.data
 
@@ -95,7 +95,7 @@ export default {
       for (const data of results) {
         unitData.push({
           meta: {
-            no: data.no,
+            id: data.id,
             name: data.name,
           },
           status: [
