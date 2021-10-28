@@ -12,17 +12,19 @@
         class="unit-search-box"
       ></v-text-field>
 
-      <v-row justify="right">
+      <v-row>
         <v-col cols="6" sm="3" md="2">
           <v-text-field
             v-model="charaLv"
             outlined
             dense
-            :rules="rules"
             hide-details="auto"
             prefix="Lv."
             @change="fetchData"
           />
+        </v-col>
+        <v-col cols="6" sm="3" md="2">
+          <v-checkbox v-model="onlyMyUnits" label="所持キャラのみ" />
         </v-col>
       </v-row>
 
@@ -49,6 +51,10 @@
             item.name
           }}</nuxt-link>
         </template>
+        <template #[`item.myUnit`]="{ item }">
+          <div v-if="item.myUnit">🔵</div>
+          <div v-else>🔴</div>
+        </template>
       </v-data-table>
     </v-col>
   </v-row>
@@ -63,6 +69,7 @@ export default {
       loading: true,
       search: null,
       charaLv: 30,
+      onlyMyUnits: false,
       headers: [
         { text: 'No.', value: 'id' },
         { text: 'ランク', value: 'rank' },
@@ -88,6 +95,7 @@ export default {
         { text: '射程', value: 'reach' },
         { text: 'コスト', value: 'cost' },
         { text: '再生産F', value: 'again' },
+        { text: '所持', value: 'myUnit', filter: this.myUnitFilter },
       ],
       items: [],
     }
@@ -109,11 +117,26 @@ export default {
         )
         const units = response.data
 
+        const myUnits = JSON.parse(localStorage.getItem('myUnits'))
+        if (myUnits) {
+          for (const unit of units) {
+            if (myUnits.includes(unit.unitId)) {
+              unit.myUnit = true
+            }
+          }
+        }
+
         this.items = units
       } catch (e) {
         alert(`エラーが発生しました。\n${e}`)
       }
       this.loading = false
+    },
+    myUnitFilter(value) {
+      if (!this.onlyMyUnits) {
+        return true
+      }
+      return value === true
     },
   },
 }
