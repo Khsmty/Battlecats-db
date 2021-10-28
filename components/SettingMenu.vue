@@ -33,6 +33,7 @@
         <v-list-item
           @click="
             backupDialog = !backupDialog
+            restoreData = null
             loadLocalData()
           "
         >
@@ -56,7 +57,7 @@
                   <v-list-item-content>
                     <v-list-item-title>バックアップ</v-list-item-title>
                     <v-list-item-subtitle>
-                      以下のテキストをコピーし、メモ帳などに張り付けて保存してください。
+                      以下のテキストをコピーし、メモ帳などに貼り付けて保存してください。
                     </v-list-item-subtitle>
                   </v-list-item-content>
                   <v-btn color="primary" outlined @click="copyText(localData)">
@@ -70,7 +71,7 @@
                   <v-list-item-content>
                     <v-list-item-title>復元</v-list-item-title>
                     <v-list-item-subtitle>
-                      以下にデータを張り付け、適用ボタンを押してください。
+                      以下にデータを貼り付け、適用ボタンを押してください。
                     </v-list-item-subtitle>
                   </v-list-item-content>
                   <v-btn color="primary" outlined @click="restoreLocalData()">
