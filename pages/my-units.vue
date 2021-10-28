@@ -25,6 +25,7 @@
         :loading="loading"
         :search="search"
         item-key="id"
+        checkbox-color="primary"
         multi-sort
         show-select
         locale="ja-JP"
