@@ -42,10 +42,10 @@
         no-data-text="データがありません。"
       >
         <template #[`item.img`]="{ item }">
-          <UnitImg :no="item.no" />
+          <UnitImg :id="item.id" />
         </template>
         <template #[`item.name`]="{ item }">
-          <nuxt-link :to="'/unit/' + item.no.slice(0, 3)" class="list-link">{{
+          <nuxt-link :to="'/unit/' + item.id.slice(0, 3)" class="list-link">{{
             item.name
           }}</nuxt-link>
         </template>
@@ -64,7 +64,7 @@ export default {
       search: null,
       charaLv: 30,
       headers: [
-        { text: 'No.', value: 'no' },
+        { text: 'No.', value: 'id' },
         { text: 'ランク', value: 'rank' },
         {
           text: '画像',
