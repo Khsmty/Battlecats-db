@@ -24,7 +24,13 @@
           />
         </v-col>
         <v-col cols="6" sm="3" md="2">
-          <v-checkbox v-model="onlyMyUnits" label="所持キャラのみ" />
+          <v-select
+            v-model="filterByMyUnit"
+            :items="filterByMyUnitOpt"
+            outlined
+            dense
+            label="所持状況で絞り込み"
+          ></v-select>
         </v-col>
       </v-row>
 
@@ -53,7 +59,7 @@
         </template>
         <template #[`item.myUnit`]="{ item }">
           <div v-if="item.myUnit">🔵</div>
-          <div v-else>🔴</div>
+          <div v-else>-</div>
         </template>
       </v-data-table>
     </v-col>
@@ -98,6 +104,12 @@ export default {
         { text: '所持', value: 'myUnit', filter: this.myUnitFilter },
       ],
       items: [],
+      filterByMyUnit: null,
+      filterByMyUnitOpt: [
+        { text: 'しない', value: null },
+        { text: '所持キャラのみ', value: 1 },
+        { text: '未所持キャラのみ', value: 2 },
+      ],
     }
   },
   head() {
@@ -133,10 +145,13 @@ export default {
       this.loading = false
     },
     myUnitFilter(value) {
-      if (!this.onlyMyUnits) {
+      if (!this.filterByMyUnit) {
         return true
+      } else if (this.filterByMyUnit === 1) {
+        return value
+      } else if (this.filterByMyUnit === 2) {
+        return !value
       }
-      return value === true
     },
   },
 }
