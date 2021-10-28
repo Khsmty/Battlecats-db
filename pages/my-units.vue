@@ -99,7 +99,7 @@ export default {
   },
   head() {
     return {
-      title: '味方キャラクター一覧',
+      title: '所持キャラ選択',
     }
   },
   mounted() {
