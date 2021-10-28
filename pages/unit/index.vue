@@ -5,8 +5,9 @@
       <v-text-field
         v-model="search"
         append-icon="mdi-magnify"
-        label="キャラクターを検索..."
-        single-line
+        label="キャラクターを検索"
+        placeholder="キャラクター名やステータスを入力..."
+        outlined
         hide-details
         class="unit-search-box"
       ></v-text-field>
@@ -60,7 +61,7 @@ export default {
   data() {
     return {
       loading: true,
-      search: '',
+      search: null,
       charaLv: 30,
       headers: [
         { text: 'No.', value: 'no' },
@@ -104,7 +105,7 @@ export default {
       this.loading = true
       try {
         const response = await Axios.get(
-          `https://script.google.com/macros/s/AKfycbzuwyRlArUbcICxCjN5YfU5O8UnNimTWyO8CiIpdcUshEfK-4wkIk-9TKWhVRkLDQgPxg/exec?level=${this.charaLv}`
+          `https://script.google.com/macros/s/AKfycbzuwyRlArUbcICxCjN5YfU5O8UnNimTWyO8CiIpdcUshEfK-4wkIk-9TKWhVRkLDQgPxg/exec?type=list&level=${this.charaLv}`
         )
         const units = response.data
 

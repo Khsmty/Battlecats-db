@@ -2,9 +2,9 @@
   <v-img
     :src="
       'https://battlecats-img.pages.dev/unit/uni' +
-      noToString(no) +
+      idToString(id) +
       '_' +
-      (no.slice(-1) === '1' ? 'f' : no.slice(-1) === '2' ? 'c' : 's') +
+      (id.slice(-1) === '1' ? 'f' : id.slice(-1) === '2' ? 'c' : 's') +
       '00.png'
     "
     max-height="50"
@@ -15,14 +15,14 @@
 <script>
 export default {
   props: {
-    no: {
+    id: {
       type: String,
       required: true,
     },
   },
   methods: {
-    noToString(no) {
-      let result = String(Number(no.slice(0, 3)) - 1)
+    idToString(id) {
+      let result = String(Number(id.slice(0, 3)) - 1)
 
       if (result.length === 1) {
         result = '00' + result

@@ -83,7 +83,7 @@ export default {
       }
 
       const response = await Axios.get(
-        `https://script.google.com/macros/s/AKfycbzuwyRlArUbcICxCjN5YfU5O8UnNimTWyO8CiIpdcUshEfK-4wkIk-9TKWhVRkLDQgPxg/exec?no=${this.$route.params.unitNo}&level=30`
+        `https://script.google.com/macros/s/AKfycbzuwyRlArUbcICxCjN5YfU5O8UnNimTWyO8CiIpdcUshEfK-4wkIk-9TKWhVRkLDQgPxg/exec?type=detail&id=${this.$route.params.unitNo}&level=30`
       )
       const results = response.data
 

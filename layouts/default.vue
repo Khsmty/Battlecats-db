@@ -68,6 +68,11 @@ export default {
           title: '味方キャラクター',
           to: '/unit',
         },
+        {
+          icon: 'mdi-account-multiple',
+          title: '所持キャラ選択',
+          to: '/my-units',
+        }
       ],
       bottomItems: [
         {

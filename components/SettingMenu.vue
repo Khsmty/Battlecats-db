@@ -21,7 +21,7 @@
         <v-subheader>一般</v-subheader>
         <v-list-item>
           <v-list-item-action>
-            <v-checkbox v-model="darkMode" @change="toggleTheme"></v-checkbox>
+            <v-switch v-model="darkMode" @change="toggleTheme" />
           </v-list-item-action>
           <v-list-item-content>
             <v-list-item-title>ダークモード</v-list-item-title>
@@ -30,38 +30,59 @@
             </v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
-        <v-list-item @click="backupDialog = !backupDialog">
+        <v-list-item
+          @click="
+            backupDialog = !backupDialog
+            loadLocalData()
+          "
+        >
           <v-list-item-content>
             <v-list-item-title>バックアップと復元</v-list-item-title>
             <v-list-item-subtitle>
               ブラウザに保存したデータをバックアップしたり復元したりできます。
             </v-list-item-subtitle>
           </v-list-item-content>
-          <v-dialog
-            v-model="backupDialog"
-            hide-overlay
-            transition="dialog-bottom-transition"
-            fullscreen
-          >
+
+          <v-dialog v-model="backupDialog" hide-overlay fullscreen>
             <v-card class="setting-card">
               <v-toolbar color="primary">
                 <v-btn icon @click="backupDialog = !backupDialog">
-                  <v-icon>mdi-close</v-icon>
+                  <v-icon>mdi-arrow-left</v-icon>
                 </v-btn>
                 <v-toolbar-title>バックアップと復元</v-toolbar-title>
               </v-toolbar>
-              <v-list three-line subheader>
-                <v-subheader>バックアップ</v-subheader>
+              <v-list three-line>
                 <v-list-item>
-                  <v-textarea
-                    outlined
-                    name="input-7-4"
-                    label="Outlined textarea"
-                    value="localStorageDatas"
-                  />
+                  <v-list-item-content>
+                    <v-list-item-title>バックアップ</v-list-item-title>
+                    <v-list-item-subtitle>
+                      以下のテキストをコピーし、メモ帳などに張り付けて保存してください。
+                    </v-list-item-subtitle>
+                  </v-list-item-content>
+                  <v-btn color="primary" outlined @click="copyText(localData)">
+                    コピー
+                  </v-btn>
+                </v-list-item>
+                <v-list-item>
+                  <v-textarea :value="localData" readonly outlined />
+                </v-list-item>
+                <v-list-item>
+                  <v-list-item-content>
+                    <v-list-item-title>復元</v-list-item-title>
+                    <v-list-item-subtitle>
+                      以下にデータを張り付け、適用ボタンを押してください。
+                    </v-list-item-subtitle>
+                  </v-list-item-content>
+                  <v-btn color="primary" outlined @click="restoreLocalData()">
+                    適用
+                  </v-btn>
+                </v-list-item>
+                <v-list-item>
+                  <v-textarea v-model="restoreData" outlined />
                 </v-list-item>
               </v-list>
             </v-card>
+            <v-snackbar v-model="snackbar">{{ snackbarText }}</v-snackbar>
           </v-dialog>
         </v-list-item>
       </v-list>
@@ -75,7 +96,11 @@ export default {
     return {
       dialog: false,
       backupDialog: false,
+      snackbar: false,
+      snackbarText: null,
       darkMode: false,
+      localData: '[]',
+      restoreData: null,
     }
   },
   mounted() {
@@ -92,6 +117,39 @@ export default {
       const newTheme = this.$vuetify.theme.dark ? 'light' : 'dark'
       this.$vuetify.theme.dark = !this.$vuetify.theme.dark
       localStorage.setItem('theme', newTheme)
+    },
+    copyText(text) {
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(text)
+        this.snackbarText = 'コピーしました！'
+        this.snackbar = true
+      } else {
+        this.snackbarText = 'お使いのブラウザではコピーできません。'
+        this.snackbar = true
+      }
+    },
+    loadLocalData() {
+      const localData = []
+      for (const key in localStorage) {
+        const value = localStorage.getItem(key)
+        if (value) {
+          localData.push({ key, value })
+        }
+      }
+      this.localData = JSON.stringify(localData)
+    },
+    restoreLocalData() {
+      try {
+        const restoreData = JSON.parse(this.restoreData)
+        for (const data of restoreData) {
+          localStorage.setItem(data.key, data.value)
+        }
+        this.snackbarText = '設定を復元しました！'
+        this.snackbar = true
+      } catch (e) {
+        this.snackbarText = '設定の復元に失敗しました。'
+        this.snackbar = true
+      }
     },
   },
 }
