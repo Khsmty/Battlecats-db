@@ -74,7 +74,7 @@ export default {
     return {
       loading: true,
       search: null,
-      charaLv: 30,
+      charaLv: '30',
       onlyMyUnits: false,
       headers: [
         { text: 'No.', value: 'id' },
@@ -124,21 +124,39 @@ export default {
     async fetchData() {
       this.loading = true
       try {
-        const response = await Axios.get(
-          `https://script.google.com/macros/s/AKfycbzuwyRlArUbcICxCjN5YfU5O8UnNimTWyO8CiIpdcUshEfK-4wkIk-9TKWhVRkLDQgPxg/exec?type=list&level=${this.charaLv}`
-        )
-        const units = response.data
+        if (this.charaLv === '30') {
+          const response = await Axios.get('/tsv/units.tsv')
+          const units = response.data
 
-        const myUnits = JSON.parse(localStorage.getItem('myUnits'))
-        if (myUnits) {
-          for (const unit of units) {
-            if (myUnits.includes(unit.unitId)) {
-              unit.myUnit = true
+          const jsonData = this.tsvToJSON(units)
+
+          const myUnits = JSON.parse(localStorage.getItem('myUnits'))
+          if (myUnits) {
+            for (const unit of jsonData) {
+              if (myUnits.includes(unit.unitId)) {
+                unit.myUnit = true
+              }
             }
           }
-        }
 
-        this.items = units
+          this.items = jsonData
+        } else {
+          const response = await Axios.get(
+            `https://script.google.com/macros/s/AKfycbzuwyRlArUbcICxCjN5YfU5O8UnNimTWyO8CiIpdcUshEfK-4wkIk-9TKWhVRkLDQgPxg/exec?type=list&level=${this.charaLv}`
+          )
+          const units = response.data
+
+          const myUnits = JSON.parse(localStorage.getItem('myUnits'))
+          if (myUnits) {
+            for (const unit of units) {
+              if (myUnits.includes(unit.unitId)) {
+                unit.myUnit = true
+              }
+            }
+          }
+
+          this.items = units
+        }
       } catch (e) {
         alert(`エラーが発生しました。\n${e}`)
       }
@@ -152,6 +170,24 @@ export default {
       } else if (this.filterByMyUnit === 2) {
         return !value
       }
+    },
+    tsvToJSON(tsv) {
+      const lines = tsv.split('\n')
+      const result = []
+      const headers = lines[0].split('\t')
+
+      for (let i = 1; i < lines.length; i++) {
+        const obj = {}
+        const currentline = lines[i].split('\t')
+
+        for (let j = 0; j < headers.length; j++) {
+          obj[headers[j]] = currentline[j]
+        }
+
+        result.push(obj)
+      }
+
+      return result
     },
   },
 }

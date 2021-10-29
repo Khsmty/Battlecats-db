@@ -1,7 +1,7 @@
 <template>
   <v-img
     :src="
-      'https://battlecats-img.pages.dev/unit/uni' +
+      'https://battlecats-data.pages.dev/img/unit/uni' +
       idToString(id) +
       '_' +
       (id.slice(-1) === '1' ? 'f' : id.slice(-1) === '2' ? 'c' : 's') +
