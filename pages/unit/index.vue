@@ -90,10 +90,10 @@ export default {
           sortable: false,
           value: 'name',
         },
-        { text: '体力', value: 'health' },
+        { text: '体力', value: 'hp' },
         { text: 'KB', value: 'kb' },
         { text: '速度', value: 'speed' },
-        { text: '攻撃力', value: 'attack' },
+        { text: '攻撃力', value: 'atk' },
         { text: 'DPS', value: 'dps' },
         { text: '範囲', value: 'range' },
         { text: '頻度F', value: 'atkFreq' },
@@ -125,7 +125,7 @@ export default {
       this.loading = true
       try {
         const response = await Axios.get(
-          `https://battlecats-api.tubuanha.repl.co/unitlist?level=${this.charaLv}`
+          `https://Battlecats-api.tubuanha.repl.co/unitlist?level=${this.charaLv}`
         )
         const units = response.data
 

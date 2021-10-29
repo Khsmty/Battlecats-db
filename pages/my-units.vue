@@ -109,7 +109,9 @@ export default {
     async fetchData() {
       this.loading = true
       try {
-        const response = await Axios.get('https://battlecats-api.tubuanha.repl.co/unitlist?level=1')
+        const response = await Axios.get(
+          'https://Battlecats-api.tubuanha.repl.co/unitlist?level=1'
+        )
         const units = response.data
 
         const myUnits = localStorage.getItem('myUnits') || []
