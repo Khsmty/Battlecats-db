@@ -124,37 +124,21 @@ export default {
     async fetchData() {
       this.loading = true
       try {
-        if (this.charaLv === '30') {
-          const response = await Axios.get('/tsv/units.tsv')
-          const units = this.tsvToJSON(response.data)
+        const response = await Axios.get(
+          `https://battlecats-api.tubuanha.repl.co/unitlist?level=${this.charaLv}`
+        )
+        const units = response.data
 
-          const myUnits = JSON.parse(localStorage.getItem('myUnits'))
-          if (myUnits) {
-            for (const unit of units) {
-              if (myUnits.includes(('000' + unit.unitId).slice(-3))) {
-                unit.myUnit = true
-              }
+        const myUnits = JSON.parse(localStorage.getItem('myUnits'))
+        if (myUnits) {
+          for (const unit of units) {
+            if (myUnits.includes(unit.unitId)) {
+              unit.myUnit = true
             }
           }
-
-          this.items = units
-        } else {
-          const response = await Axios.get(
-            `https://script.google.com/macros/s/AKfycbzuwyRlArUbcICxCjN5YfU5O8UnNimTWyO8CiIpdcUshEfK-4wkIk-9TKWhVRkLDQgPxg/exec?type=list&level=${this.charaLv}`
-          )
-          const units = response.data
-
-          const myUnits = JSON.parse(localStorage.getItem('myUnits'))
-          if (myUnits) {
-            for (const unit of units) {
-              if (myUnits.includes(unit.unitId)) {
-                unit.myUnit = true
-              }
-            }
-          }
-
-          this.items = units
         }
+
+        this.items = units
       } catch (e) {
         alert(`エラーが発生しました。\n${e}`)
       }

@@ -109,8 +109,8 @@ export default {
     async fetchData() {
       this.loading = true
       try {
-        const response = await Axios.get('/tsv/units.tsv')
-        const units = this.tsvToJSON(response.data)
+        const response = await Axios.get('https://battlecats-api.tubuanha.repl.co/unitlist?level=1')
+        const units = response.data
 
         const myUnits = localStorage.getItem('myUnits') || []
 
@@ -150,24 +150,6 @@ export default {
         const myUnits = this.selected.map((item) => item.id)
         localStorage.setItem('myUnits', JSON.stringify(myUnits))
       }, 500)
-    },
-    tsvToJSON(tsv) {
-      const lines = tsv.split('\n')
-      const result = []
-      const headers = lines[0].split('\t')
-
-      for (let i = 1; i < lines.length; i++) {
-        const obj = {}
-        const currentline = lines[i].split('\t')
-
-        for (let j = 0; j < headers.length; j++) {
-          obj[headers[j]] = currentline[j]
-        }
-
-        result.push(obj)
-      }
-
-      return result
     },
   },
 }
