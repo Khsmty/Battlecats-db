@@ -126,20 +126,18 @@ export default {
       try {
         if (this.charaLv === '30') {
           const response = await Axios.get('/tsv/units.tsv')
-          const units = response.data
-
-          const jsonData = this.tsvToJSON(units)
+          const units = this.tsvToJSON(response.data)
 
           const myUnits = JSON.parse(localStorage.getItem('myUnits'))
           if (myUnits) {
-            for (const unit of jsonData) {
-              if (myUnits.includes(unit.unitId)) {
+            for (const unit of units) {
+              if (myUnits.includes(('000' + unit.unitId).slice(-3))) {
                 unit.myUnit = true
               }
             }
           }
 
-          this.items = jsonData
+          this.items = units
         } else {
           const response = await Axios.get(
             `https://script.google.com/macros/s/AKfycbzuwyRlArUbcICxCjN5YfU5O8UnNimTWyO8CiIpdcUshEfK-4wkIk-9TKWhVRkLDQgPxg/exec?type=list&level=${this.charaLv}`
