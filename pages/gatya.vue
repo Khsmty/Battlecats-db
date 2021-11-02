@@ -16,7 +16,7 @@ export default {
   },
   methods: {
     async getGatya() {
-      const response = await Axios.get('https://battlecats-api.f5.si/eventlist')
+      const response = await Axios.get('http://localhost:8080/eventlist')
       const events = response.data
 
       alert(events)
