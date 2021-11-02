@@ -83,7 +83,7 @@ export default {
       }
 
       const response = await Axios.get(
-        `https://script.google.com/macros/s/AKfycbzuwyRlArUbcICxCjN5YfU5O8UnNimTWyO8CiIpdcUshEfK-4wkIk-9TKWhVRkLDQgPxg/exec?type=detail&id=${this.$route.params.unitId}&level=30`
+        `https://battlecats-api.f5.si/unitdetail?level=30&instinct=false&instinct_atk=0&instinct_hp=0&id=${this.$route.params.unitId}`
       )
       const results = response.data
 
@@ -102,11 +102,11 @@ export default {
             [
               {
                 title: '体力',
-                value: data.health,
+                value: data.hp,
               },
               {
                 title: '攻撃力',
-                value: data.attack,
+                value: data.atk,
               },
               {
                 title: 'DPS',
@@ -138,15 +138,15 @@ export default {
             [
               {
                 title: '攻撃頻度F',
-                value: data.atkFreq,
+                value: data.atkFrequency,
               },
               {
                 title: '攻撃発生F',
-                value: data.atkOccu,
+                value: data.atkOccurrence,
               },
               {
                 title: '再生産F',
-                value: data.again,
+                value: data.reproduction,
               },
             ],
           ],

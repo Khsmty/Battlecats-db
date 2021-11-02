@@ -31,6 +31,7 @@
         locale="ja-JP"
         loading-text="データを読み込んでいます..."
         no-data-text="データがありません。"
+        no-results-text="一致するデータが見つかりません。"
         @item-selected="saveMyUnit()"
         @toggle-select-all="saveMyUnit()"
       >
@@ -62,6 +63,7 @@ export default {
         { text: 'No.', value: 'id' },
         {
           text: '画像',
+          align: 'center',
           sortable: false,
           value: 'img1',
         },
@@ -73,6 +75,7 @@ export default {
         },
         {
           text: '画像',
+          align: 'center',
           sortable: false,
           value: 'img2',
         },
@@ -84,6 +87,7 @@ export default {
         },
         {
           text: '画像',
+          align: 'center',
           sortable: false,
           value: 'img3',
         },
@@ -109,8 +113,10 @@ export default {
     async fetchData() {
       this.loading = true
       try {
-        const response = await Axios.get('/tsv/units.tsv')
-        const units = this.tsvToJSON(response.data)
+        const response = await Axios.get(
+          'https://battlecats-api.f5.si/unitlist?level=1&instinct=false&instinct_atk=0&instinct_hp=0'
+        )
+        const units = response.data
 
         const myUnits = localStorage.getItem('myUnits') || []
 
@@ -150,24 +156,6 @@ export default {
         const myUnits = this.selected.map((item) => item.id)
         localStorage.setItem('myUnits', JSON.stringify(myUnits))
       }, 500)
-    },
-    tsvToJSON(tsv) {
-      const lines = tsv.split('\n')
-      const result = []
-      const headers = lines[0].split('\t')
-
-      for (let i = 1; i < lines.length; i++) {
-        const obj = {}
-        const currentline = lines[i].split('\t')
-
-        for (let j = 0; j < headers.length; j++) {
-          obj[headers[j]] = currentline[j]
-        }
-
-        result.push(obj)
-      }
-
-      return result
     },
   },
 }

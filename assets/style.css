@@ -20,3 +20,46 @@
   > tr:hover:not(.v-data-table__expanded__content):not(.v-data-table__empty-wrapper) {
   background-color: #181818 !important;
 }
+.theme--dark.v-data-table tbody tr.v-data-table__selected {
+  background-color: #0e0e0e !important;
+}
+/* テーブル枠(ダーク) */
+.theme--dark.v-data-table
+  > .v-data-table__wrapper
+  > table
+  > tbody
+  > tr
+  > td:not(.v-data-table__mobile-row),
+.theme--dark.v-data-table
+  > .v-data-table__wrapper
+  > table
+  > tbody
+  > tr
+  > th:not(.v-data-table__mobile-row) {
+  border: 0.5px solid #3e3e3ec0 !important;
+}
+/* テーブル枠(ライト) */
+.theme--light.v-data-table
+  > .v-data-table__wrapper
+  > table
+  > tbody
+  > tr
+  > td:not(.v-data-table__mobile-row),
+.theme--light.v-data-table
+  > .v-data-table__wrapper
+  > table
+  > tbody
+  > tr
+  > th:not(.v-data-table__mobile-row) {
+  border: 0.5px solid #e0e0e0c0 !important;
+}
+/* テーブルスタイル */
+.v-data-table > .v-data-table__wrapper > table > tbody > tr > td,
+.v-data-table > .v-data-table__wrapper > table > tbody > tr > th,
+.v-data-table > .v-data-table__wrapper > table > thead > tr > td,
+.v-data-table > .v-data-table__wrapper > table > thead > tr > th,
+.v-data-table > .v-data-table__wrapper > table > tfoot > tr > td,
+.v-data-table > .v-data-table__wrapper > table > tfoot > tr > th {
+  padding: 0.1rem !important;
+  text-align: center !important;
+}
