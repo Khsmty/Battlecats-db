@@ -54,12 +54,43 @@
   border: 0.5px solid #e0e0e0c0 !important;
 }
 /* テーブルスタイル */
-.v-data-table > .v-data-table__wrapper > table > tbody > tr > td,
-.v-data-table > .v-data-table__wrapper > table > tbody > tr > th,
-.v-data-table > .v-data-table__wrapper > table > thead > tr > td,
-.v-data-table > .v-data-table__wrapper > table > thead > tr > th,
-.v-data-table > .v-data-table__wrapper > table > tfoot > tr > td,
-.v-data-table > .v-data-table__wrapper > table > tfoot > tr > th {
+.v-data-table
+  > .v-data-table__wrapper
+  > table
+  > tbody
+  > tr
+  > td:not(.v-data-table__mobile-row),
+.v-data-table
+  > .v-data-table__wrapper
+  > table
+  > tbody
+  > tr
+  > th:not(.v-data-table__mobile-row),
+.v-data-table
+  > .v-data-table__wrapper
+  > table
+  > thead
+  > tr
+  > td:not(.v-data-table-header-mobile__wrapper),
+.v-data-table
+  > .v-data-table__wrapper
+  > table
+  > thead
+  > tr
+  > th
+  > div:not(.v-data-table-header-mobile__wrapper),
+.v-data-table
+  > .v-data-table__wrapper
+  > table
+  > tfoot
+  > tr
+  > td:not(.v-data-table__mobile-row),
+.v-data-table
+  > .v-data-table__wrapper
+  > table
+  > tfoot
+  > tr
+  > th:not(.v-data-table__mobile-row) {
   padding: 0.1rem !important;
   text-align: center !important;
 }
