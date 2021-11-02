@@ -31,6 +31,7 @@
         locale="ja-JP"
         loading-text="データを読み込んでいます..."
         no-data-text="データがありません。"
+        no-results-text="一致するデータが見つかりません。"
         @item-selected="saveMyUnit()"
         @toggle-select-all="saveMyUnit()"
       >
@@ -62,6 +63,7 @@ export default {
         { text: 'No.', value: 'id' },
         {
           text: '画像',
+          align: 'center',
           sortable: false,
           value: 'img1',
         },
@@ -73,6 +75,7 @@ export default {
         },
         {
           text: '画像',
+          align: 'center',
           sortable: false,
           value: 'img2',
         },
@@ -84,6 +87,7 @@ export default {
         },
         {
           text: '画像',
+          align: 'center',
           sortable: false,
           value: 'img3',
         },
@@ -110,7 +114,7 @@ export default {
       this.loading = true
       try {
         const response = await Axios.get(
-          'https://Battlecats-api.tubuanha.repl.co/unitlist?level=1'
+          'https://battlecats-api.f5.si/unitlist?level=1&instinct=false&instinct_atk=0&instinct_hp=0'
         )
         const units = response.data
 

@@ -99,18 +99,18 @@ export default {
       backupDialog: false,
       snackbar: false,
       snackbarText: null,
-      darkMode: false,
+      darkMode: true,
       localData: '[]',
       restoreData: null,
     }
   },
   mounted() {
     const theme = localStorage.getItem('theme')
-    if (theme && theme === 'dark') {
-      this.$vuetify.theme.dark = true
-      this.darkMode = true
-    } else {
+    if (theme && theme === 'light') {
       this.$vuetify.theme.dark = false
+      this.darkMode = false
+    } else {
+      this.$vuetify.theme.dark = true
     }
   },
   methods: {

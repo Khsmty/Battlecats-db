@@ -20,7 +20,7 @@
             dense
             hide-details="auto"
             prefix="Lv."
-            @change="fetchData"
+            @change="changeLv()"
           />
         </v-col>
         <v-col cols="6" sm="3" md="2">
@@ -48,6 +48,7 @@
         locale="ja-JP"
         loading-text="データを読み込んでいます..."
         no-data-text="データがありません。"
+        no-results-text="一致するデータが見つかりません。"
       >
         <template #[`item.img`]="{ item }">
           <UnitImg :id="item.id" />
@@ -78,7 +79,7 @@ export default {
       onlyMyUnits: false,
       headers: [
         { text: 'No.', value: 'id' },
-        { text: 'ランク', value: 'rank' },
+        { text: 'ランク', value: 'rarity' },
         {
           text: '画像',
           sortable: false,
@@ -87,7 +88,6 @@ export default {
         {
           text: 'キャラクター名',
           align: 'start',
-          sortable: false,
           value: 'name',
         },
         { text: '体力', value: 'hp' },
@@ -96,11 +96,11 @@ export default {
         { text: '攻撃力', value: 'atk' },
         { text: 'DPS', value: 'dps' },
         { text: '範囲', value: 'range' },
-        { text: '頻度F', value: 'atkFreq' },
-        { text: '発生F', value: 'atkOccu' },
+        { text: '頻度F', value: 'atkFrequency' },
+        { text: '発生F', value: 'atkOccurrence' },
         { text: '射程', value: 'reach' },
         { text: 'コスト', value: 'cost' },
-        { text: '再生産F', value: 'again' },
+        { text: '再生産F', value: 'reproduction' },
         { text: '所持', value: 'myUnit', filter: this.myUnitFilter },
       ],
       items: [],
@@ -125,7 +125,7 @@ export default {
       this.loading = true
       try {
         const response = await Axios.get(
-          `https://Battlecats-api.tubuanha.repl.co/unitlist?level=${this.charaLv}`
+          `https://battlecats-api.f5.si/unitlist?level=${this.charaLv}&instinct=false&instinct_atk=0&instinct_hp=0`
         )
         const units = response.data
 
@@ -153,23 +153,9 @@ export default {
         return !value
       }
     },
-    tsvToJSON(tsv) {
-      const lines = tsv.split('\n')
-      const result = []
-      const headers = lines[0].split('\t')
-
-      for (let i = 1; i < lines.length; i++) {
-        const obj = {}
-        const currentline = lines[i].split('\t')
-
-        for (let j = 0; j < headers.length; j++) {
-          obj[headers[j]] = currentline[j]
-        }
-
-        result.push(obj)
-      }
-
-      return result
+    changeLv() {
+      this.fetchData()
+      localStorage.setItem('charaLv', this.charaLv)
     },
   },
 }
