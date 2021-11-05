@@ -20,9 +20,7 @@
             }}
             ({{
               ['日', '月', '火', '水', '木', '金', '土'][
-                new Date(
-                  Date.now() + 1000 * 60 * 60 * 24 * events.indexOf(event)
-                ).getDay()
+                new Date().getDay() + events.indexOf(event)
               ]
             }})
           </v-card-title>
