@@ -13,16 +13,7 @@
       >
         <v-card>
           <v-card-title class="headline">
-            {{
-              new Date(
-                Date.now() + 1000 * 60 * 60 * 24 * events.indexOf(event)
-              ).toLocaleDateString()
-            }}
-            ({{
-              ['日', '月', '火', '水', '木', '金', '土'][
-                new Date().getDay() + events.indexOf(event)
-              ]
-            }})
+            {{ generateDate(event) }}
           </v-card-title>
           <v-card-text>
             <v-simple-table>
@@ -92,6 +83,15 @@ export default {
       } catch (e) {
         alert(`エラーが発生しました。\n${e}`)
       }
+    },
+    generateDate(d) {
+      const date = new Date(
+        Date.now() + 1000 * 60 * 60 * 24 * this.events.indexOf(d)
+      )
+
+      return `${date.toLocaleDateString()} (${
+        ['日', '月', '火', '水', '木', '金', '土'][date.getDay()]
+      })`
     },
   },
 }
