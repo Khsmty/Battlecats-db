@@ -59,38 +59,44 @@
   > table
   > tbody
   > tr
-  > td:not(.v-data-table__mobile-row),
+  > td:not(.v-data-table__mobile-row, .event-list),
 .v-data-table
   > .v-data-table__wrapper
   > table
   > tbody
   > tr
-  > th:not(.v-data-table__mobile-row),
+  > th:not(.v-data-table__mobile-row, .event-list),
 .v-data-table
   > .v-data-table__wrapper
   > table
   > thead
   > tr
-  > td:not(.v-data-table-header-mobile__wrapper),
+  > td:not(.v-data-table-header-mobile__wrapper, .event-list),
 .v-data-table
   > .v-data-table__wrapper
   > table
   > thead
   > tr
   > th
-  > div:not(.v-data-table-header-mobile__wrapper),
+  > div:not(.v-data-table-header-mobile__wrapper, .event-list),
 .v-data-table
   > .v-data-table__wrapper
   > table
   > tfoot
   > tr
-  > td:not(.v-data-table__mobile-row),
+  > td:not(.v-data-table__mobile-row, .event-list),
 .v-data-table
   > .v-data-table__wrapper
   > table
   > tfoot
   > tr
-  > th:not(.v-data-table__mobile-row) {
+  > th:not(.v-data-table__mobile-row, .event-list) {
   padding: 0.1rem !important;
   text-align: center !important;
+}
+/* イベントテーブル */
+.event-list {
+  white-space: pre;
+  padding: 1rem !important;
+  text-align: left !important;
 }
