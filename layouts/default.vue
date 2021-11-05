@@ -85,6 +85,11 @@ export default {
           title: 'このサイトについて',
           to: '/about',
         },
+        {
+          icon: 'mdi-email',
+          title: 'お問い合わせ',
+          to: '/contact',
+        },
       ],
     }
   },
