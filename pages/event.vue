@@ -21,11 +21,23 @@
                 <tbody>
                   <tr>
                     <th>1日中</th>
-                    <td class="event-list">{{ event[0] }}</td>
+                    <td class="event-list">
+                      <ul>
+                        <li v-for="s in event[0]" :key="s">
+                          {{ s }}
+                        </li>
+                      </ul>
+                    </td>
                   </tr>
                   <tr v-for="i in 24" :key="i">
                     <th>{{ i - 1 }}:00～</th>
-                    <td class="event-list">{{ event[i] }}</td>
+                    <td class="event-list">
+                      <ul>
+                        <li v-for="s in event[i]" :key="s">
+                          {{ s }}
+                        </li>
+                      </ul>
+                    </td>
                   </tr>
                 </tbody>
               </template>
@@ -62,27 +74,22 @@ export default {
     }
   },
   async mounted() {
-    await this.fetchData(0)
-    await this.fetchData(1)
-    await this.fetchData(2)
-    await this.fetchData(3)
-    await this.fetchData(4)
-    await this.fetchData(5)
-    await this.fetchData(6)
-    this.loading = false
+    await this.fetchData()
   },
   methods: {
-    async fetchData(date) {
+    async fetchData() {
+      this.loading = true
       try {
         const response = await Axios.get(
-          `https://battlecats-api.f5.si/eventlist?date=${date}`
+          'https://battlecats-api.f5.si/eventlist'
         )
         const results = response.data
 
-        this.events.push(results)
+        this.events = results
       } catch (e) {
         alert(`エラーが発生しました。\n${e}`)
       }
+      this.loading = false
     },
     generateDate(d) {
       const date = new Date(

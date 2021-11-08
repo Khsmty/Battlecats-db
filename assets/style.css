@@ -96,7 +96,6 @@
 }
 /* イベントテーブル */
 .event-list {
-  white-space: pre;
   padding: 1rem !important;
   text-align: left !important;
 }
