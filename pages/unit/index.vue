@@ -12,28 +12,6 @@
         class="unit-search-box"
       ></v-text-field>
 
-      <v-row>
-        <v-col cols="6" sm="3" md="2">
-          <v-text-field
-            v-model="charaLv"
-            outlined
-            dense
-            hide-details="auto"
-            prefix="Lv."
-            @change="changeLv()"
-          />
-        </v-col>
-        <v-col cols="6" sm="3" md="2">
-          <v-select
-            v-model="filterByMyUnit"
-            :items="filterByMyUnitOpt"
-            outlined
-            dense
-            label="所持状況で絞り込み"
-          ></v-select>
-        </v-col>
-      </v-row>
-
       <v-data-table
         :headers="headers"
         :items="items"
@@ -64,6 +42,55 @@
         </template>
       </v-data-table>
     </v-col>
+    <v-dialog v-model="customizeMenu" max-width="500">
+      <template #activator="{ on, attrs }">
+        <v-btn
+          color="primary"
+          v-bind="attrs"
+          fixed
+          right
+          bottom
+          x-large
+          rounded
+          v-on="on"
+        >
+          <v-icon>mdi-wrench</v-icon>&nbsp;カスタマイズ
+        </v-btn>
+      </template>
+
+      <v-card>
+        <v-card-title>カスタマイズ</v-card-title>
+        <v-card-text>
+          <v-row>
+            <v-col cols="12">
+              <v-text-field
+                v-model="charaLv"
+                outlined
+                dense
+                hide-details="auto"
+                prefix="Lv."
+                @change="changeLv()"
+              />
+            </v-col>
+            <v-col cols="12">
+              <v-select
+                v-model="filterByMyUnit"
+                :items="filterByMyUnitOpt"
+                outlined
+                dense
+                label="所持状況で絞り込み"
+              ></v-select>
+            </v-col>
+          </v-row>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer />
+          <v-btn color="primary" text @click="customizeMenu = false"
+            >閉じる</v-btn
+          >
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-row>
 </template>
 
@@ -77,6 +104,7 @@ export default {
       search: null,
       charaLv: '30',
       onlyMyUnits: false,
+      customizeMenu: false,
       headers: [
         { text: 'No.', value: 'id' },
         { text: 'ランク', value: 'rarity' },
@@ -118,6 +146,7 @@ export default {
     }
   },
   mounted() {
+    this.loadCustomize()
     this.fetchData()
   },
   methods: {
@@ -143,6 +172,17 @@ export default {
         alert(`エラーが発生しました。\n${e}`)
       }
       this.loading = false
+    },
+    loadCustomize() {
+      this.charaLv = localStorage.getItem('charaLv') || '30'
+      this.filterByMyUnit =
+        localStorage.getItem('onlyMyUnits') === 'null'
+          ? null
+          : localStorage.getItem('onlyMyUnits') === '1'
+          ? 1
+          : localStorage.getItem('onlyMyUnits') === '2'
+          ? 2
+          : null
     },
     myUnitFilter(value) {
       if (!this.filterByMyUnit) {

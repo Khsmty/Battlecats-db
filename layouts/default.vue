@@ -38,9 +38,9 @@
     </v-navigation-drawer>
     <v-app-bar elevate-on-scroll fixed app>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-toolbar-title style="cursor: pointer" @click="$router.push('/')"
-        >にゃんこ大戦争db</v-toolbar-title
-      >
+      <v-toolbar-title style="cursor: pointer" @click="$router.push('/')">
+        にゃんこ大戦争db
+      </v-toolbar-title>
       <v-spacer />
       <SettingMenu />
     </v-app-bar>
@@ -77,7 +77,7 @@ export default {
           icon: 'mdi-account-multiple',
           title: '所持キャラ選択',
           to: '/my-units',
-        }
+        },
       ],
       bottomItems: [
         {

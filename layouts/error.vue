@@ -11,7 +11,9 @@
           </v-card-title>
           <v-card-actions>
             <v-spacer />
-            <v-btn color="primary" nuxt to="/">ホームへ戻る</v-btn>
+            <v-btn color="primary" elevation="0" to="/" nuxt>
+              ホームへ戻る
+            </v-btn>
           </v-card-actions>
         </v-card>
       </v-col>
