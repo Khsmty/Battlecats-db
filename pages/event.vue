@@ -81,7 +81,7 @@ export default {
       this.loading = true
       try {
         const response = await Axios.get(
-          'https://battlecats-api.f5.si/eventlist'
+          'https://battlecats-api.herokuapp.com/eventlist'
         )
         const results = response.data
 
