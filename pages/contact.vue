@@ -27,8 +27,9 @@
             ></v-textarea>
             <v-btn
               color="primary"
+              elevation="0"
               block
-              outlined
+              large
               :disabled="!valid"
               :loading="sending"
               @click="submit()"
