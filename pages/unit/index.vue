@@ -129,7 +129,12 @@ export default {
         { text: '射程', value: 'range' },
         { text: 'コスト', value: 'cost' },
         { text: '再生産F', value: 'reproduction' },
-        { text: '所持', value: 'myUnit', filter: this.myUnitFilter },
+        {
+          text: '所持',
+          value: 'myUnit',
+          sortable: false,
+          filter: this.myUnitFilter,
+        },
       ],
       items: [],
       filterByMyUnit: null,

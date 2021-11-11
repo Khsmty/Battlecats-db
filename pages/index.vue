@@ -5,12 +5,12 @@
         <h1 class="page-title">ホーム</h1>
       </v-col>
     </v-row>
-    <v-row v-if="!loading" justify="center">
+    <v-row justify="center">
       <v-col cols="12" sm="10" md="9">
         <v-card>
           <v-card-title class="headline">今後のイベント</v-card-title>
           <v-card-text>
-            <v-simple-table>
+            <v-simple-table v-if="!loading">
               <template #default>
                 <tbody>
                   <tr>
@@ -36,6 +36,7 @@
                 </tbody>
               </template>
             </v-simple-table>
+            <v-skeleton-loader v-else type="table-tbody" />
           </v-card-text>
           <v-card-actions>
             <v-spacer />
@@ -43,15 +44,6 @@
               イベント一覧
             </v-btn>
           </v-card-actions>
-        </v-card>
-      </v-col>
-    </v-row>
-    <v-row v-else justify="center" align="center">
-      <v-col cols="12" sm="10" md="9">
-        <v-card loading>
-          <v-card-text class="text-center">
-            データを読み込んでいます...
-          </v-card-text>
         </v-card>
       </v-col>
     </v-row>
