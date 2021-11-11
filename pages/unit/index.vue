@@ -50,7 +50,7 @@
           fixed
           right
           bottom
-          x-large
+          large
           rounded
           v-on="on"
         >
