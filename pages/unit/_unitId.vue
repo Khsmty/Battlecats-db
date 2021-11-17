@@ -83,7 +83,7 @@ export default {
       }
 
       const response = await Axios.get(
-        `https://battlecats-api.herokuapp.com/unitdetail?level=30&instinct=false&instinct_atk=0&instinct_hp=0&id=${this.$route.params.unitId}`
+        `/api/unit-detail?level=30&instinct=false&instinct_atk=0&instinct_hp=0&id=${this.$route.params.unitId}`
       )
       const results = response.data
 

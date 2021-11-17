@@ -8,7 +8,7 @@ module.exports = function (query, res) {
     !query.instinct_atk ||
     !query.instinct_hp
   ) {
-    res.send('Error: Invalid query.').status(400)
+    res.status(400).end('Error: Invalid query.')
     return false
   }
 
