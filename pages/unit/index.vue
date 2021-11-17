@@ -95,8 +95,6 @@
 </template>
 
 <script>
-import Axios from 'axios'
-
 export default {
   data() {
     return {
@@ -158,10 +156,9 @@ export default {
     async fetchData() {
       this.loading = true
       try {
-        const response = await Axios.get(
+        const units = await this.$axios.$get(
           `/api/unit-list?level=${this.charaLv}&instinct=false&instinct_atk=0&instinct_hp=0`
         )
-        const units = response.data
 
         const myUnits = JSON.parse(localStorage.getItem('myUnits'))
         if (myUnits) {

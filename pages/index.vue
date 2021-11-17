@@ -51,8 +51,6 @@
 </template>
 
 <script>
-import axios from 'axios'
-
 export default {
   data() {
     return {
@@ -72,10 +70,9 @@ export default {
   methods: {
     async getUpcomingEvents() {
       this.loading = true
-      const response = await axios.get(
-        `https://battlecats-api.herokuapp.com/upcomingevent?hour=${this.nowHour}`
+      const data = await this.$axios.$get(
+        '/api/upcoming-event'
       )
-      const data = response.data
 
       this.upcomingEvents = data
       this.loading = false

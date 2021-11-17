@@ -60,8 +60,6 @@
 </template>
 
 <script>
-import Axios from 'axios'
-
 export default {
   data() {
     return {
@@ -82,17 +80,16 @@ export default {
         this.$nuxt.error({ statusCode: 404 })
       }
 
-      const response = await Axios.get(
+      const response = await this.$axios.$get(
         `/api/unit-detail?level=30&instinct=false&instinct_atk=0&instinct_hp=0&id=${this.$route.params.unitId}`
       )
-      const results = response.data
 
-      if (!results[0]) {
+      if (!response[0]) {
         this.$nuxt.error({ statusCode: 404 })
       }
 
       const unitData = []
-      for (const data of results) {
+      for (const data of response) {
         unitData.push({
           meta: {
             id: data.id,

@@ -52,8 +52,6 @@
 </template>
 
 <script>
-import Axios from 'axios'
-
 export default {
   data() {
     return {
@@ -73,10 +71,9 @@ export default {
     async fetchData() {
       this.loading = true
       try {
-        const response = await Axios.get(
-          'https://battlecats-api.herokuapp.com/eventlist'
+        const results = await this.$axios.$get(
+          '/api/event-list'
         )
-        const results = response.data
 
         this.events = results
       } catch (e) {
