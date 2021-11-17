@@ -1,4 +1,5 @@
 const fs = require('fs')
+const path = require('path')
 
 module.exports = function (query, res) {
   if (
@@ -11,7 +12,7 @@ module.exports = function (query, res) {
     return false
   }
 
-  const dataFile = fs.readFileSync('./static/tsv/units.tsv').toString()
+  const dataFile = fs.readFileSync(path.resolve(__dirname, '../../static/tsv/units.tsv')).toString()
   const unitsData = tsvToJson(dataFile)
 
   const result = []
