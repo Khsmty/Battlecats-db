@@ -114,7 +114,7 @@ export default {
       this.loading = true
       try {
         const response = await Axios.get(
-          'https://battlecats-api.herokuapp.com/unitlist?level=1&instinct=false&instinct_atk=0&instinct_hp=0'
+          '/api/unit-list?level=1&instinct=false&instinct_atk=0&instinct_hp=0'
         )
         const units = response.data
 
