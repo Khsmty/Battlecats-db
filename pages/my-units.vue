@@ -112,7 +112,7 @@ export default {
       this.loading = true
       try {
         const units = await this.$axios.$get(
-          '/api/unit-list?level=1&instinct=false&instinct_atk=0&instinct_hp=0'
+          'https://battlecats-db.vercel.app/api/unit-list?level=1&instinct=false&instinct_atk=0&instinct_hp=0'
         )
 
         const myUnits = localStorage.getItem('myUnits') || []

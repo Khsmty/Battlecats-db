@@ -71,7 +71,7 @@ export default {
     async getUpcomingEvents() {
       this.loading = true
       const data = await this.$axios.$get(
-        '/api/upcoming-event'
+        'https://battlecats-db.vercel.app/api/upcoming-event'
       )
 
       this.upcomingEvents = data

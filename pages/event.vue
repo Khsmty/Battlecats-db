@@ -72,7 +72,7 @@ export default {
       this.loading = true
       try {
         const results = await this.$axios.$get(
-          '/api/event-list'
+          'https://battlecats-db.vercel.app/api/event-list'
         )
 
         this.events = results

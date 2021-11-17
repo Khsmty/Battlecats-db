@@ -157,7 +157,7 @@ export default {
       this.loading = true
       try {
         const units = await this.$axios.$get(
-          `/api/unit-list?level=${this.charaLv}&instinct=false&instinct_atk=0&instinct_hp=0`
+          `https://battlecats-db.vercel.app/api/unit-list?level=${this.charaLv}&instinct=false&instinct_atk=0&instinct_hp=0`
         )
 
         const myUnits = JSON.parse(localStorage.getItem('myUnits'))

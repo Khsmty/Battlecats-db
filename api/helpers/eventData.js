@@ -1,7 +1,7 @@
 const axios = require('axios')
 
 module.exports = async () => {
-  const api = await axios.get('http://localhost:8080/')
+  const api = await axios.get('https://battlecats-api.herokuapp.com/')
   const everyEvent = api.data[0]
   const cells = api.data[1]
 

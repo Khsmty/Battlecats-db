@@ -81,7 +81,7 @@ export default {
       }
 
       const response = await this.$axios.$get(
-        `/api/unit-detail?level=30&instinct=false&instinct_atk=0&instinct_hp=0&id=${this.$route.params.unitId}`
+        `https://battlecats-db.vercel.app/api/unit-detail?level=30&instinct=false&instinct_atk=0&instinct_hp=0&id=${this.$route.params.unitId}`
       )
 
       if (!response[0]) {
