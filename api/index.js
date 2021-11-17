@@ -1,8 +1,11 @@
-import express from 'express'
+const app = require('express')()
 
-const app = express()
-app.use(express.json())
+const hello = require('./routes/hello')
 
-app.get('/', (_req, res) => res.send('It works!'))
+app.get('/api', (_req, res) => {
+  res.status(301).redirect('/')
+})
 
-export default { path: '/api', handler: app }
+app.use('/api/hello', hello)
+
+module.exports = app
