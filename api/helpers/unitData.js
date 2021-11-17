@@ -12,7 +12,7 @@ module.exports = function (query, res) {
     return false
   }
 
-  const dataFile = fs.readFileSync(path.resolve(__dirname, '../../static/tsv/units.tsv')).toString()
+  const dataFile = fs.readFileSync(path.resolve(__dirname, '../data/tsv/units.tsv')).toString()
   const unitsData = tsvToJson(dataFile)
 
   const result = []
