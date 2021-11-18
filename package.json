@@ -19,7 +19,7 @@
     "jsdom": "^18.1.0",
     "nuxt": "^2.15.7",
     "path": "^0.12.7",
-    "vuetify": "^2.5.13"
+    "vuetify": "^2.6.0"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.16.3",
