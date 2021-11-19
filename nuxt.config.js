@@ -32,6 +32,7 @@ export default {
     '@nuxt/typescript-build',
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
+    '@nuxtjs/google-analytics',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -43,6 +44,10 @@ export default {
   ],
 
   serverMiddleware: ['~/api'],
+
+  googleAnalytics: {
+    id: 'G-5E3YSJ6KW8',
+  },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {},
