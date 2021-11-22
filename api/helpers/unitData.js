@@ -12,7 +12,9 @@ module.exports = function (query, res) {
     return false
   }
 
-  const dataFile = fs.readFileSync(path.resolve(__dirname, '../data/tsv/units.tsv')).toString()
+  const dataFile = fs
+    .readFileSync(path.resolve(__dirname, '../data/tsv/units.tsv'))
+    .toString()
   const unitsData = tsvToJson(dataFile)
 
   const result = []
@@ -392,6 +394,62 @@ module.exports = function (query, res) {
       query.instinct === 'true' && unit[162] !== 0
         ? Number(unit[162])
         : Number(unit[53])
+
+    // 敵
+    obj.enemy = []
+
+    for (let i = 0; i < 10; i++) {
+      if (unit[54 + i] !== 0) {
+        obj.enemy.push(
+          [
+            '白',
+            '赤',
+            '浮',
+            '黒',
+            'メタル',
+            '天使',
+            'エイリアン',
+            'ゾンビ',
+            '古代',
+            '悪魔',
+          ][i]
+        )
+      }
+    }
+
+    // めっぽう強い
+    obj.veryStrong = unit[64] !== 0
+
+    // 超ダメージ
+    if (query.instinct === 'true' && unit[117] !== 0) {
+      obj.superDamage = true
+    } else if (unit[65] === 0) {
+      obj.superDamage = false
+    } else {
+      obj.superDamage = true
+    }
+
+    // 打たれ強い
+    if (query.instinct === 'true' && unit[116] !== 0) {
+      obj.strongToBeStruck = true
+    } else if (unit[66] === 0) {
+      obj.strongToBeStruck = false
+    } else {
+      obj.strongToBeStruck = true
+    }
+
+    // 極ダメージ
+    obj.extremeDamage = unit[67] !== 0
+
+    // 超打たれ強い
+    obj.superStrongToBeStruck = unit[68] !== 0
+
+    // ふっとばす
+    if (query.instinct === 'true' && unit[118] !== 0) {
+      obj.butterbur = unit[118]
+    } else {
+      obj.butterbur = unit[69] === 0 ? false : unit[69]
+    }
 
     // ........................................
 

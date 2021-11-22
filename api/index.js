@@ -24,8 +24,4 @@ app.use('/api/unit-detail', unitDetail)
 app.use('/api/unit-list', unitList)
 app.use('/api/upcoming-event', upcomingEvent)
 
-setInterval(() => {
-  // global.eventData = require('./helpers/fetchEvents.js')()
-}, 60000)
-
 module.exports = app
