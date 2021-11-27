@@ -36,61 +36,18 @@
             item.name
           }}</nuxt-link>
         </template>
-        <template #[`item.myUnit`]="{ item }">
-          <div v-if="item.myUnit">🔵</div>
-          <div v-else>-</div>
-        </template>
       </v-data-table>
     </v-col>
-    <v-dialog v-model="customizeMenu" max-width="500">
-      <template #activator="{ on, attrs }">
-        <v-btn
-          color="primary"
-          v-bind="attrs"
-          fixed
-          right
-          bottom
-          large
-          rounded
-          v-on="on"
-        >
-          <v-icon>mdi-wrench</v-icon>&nbsp;カスタマイズ
-        </v-btn>
-      </template>
 
-      <v-card>
-        <v-card-title>カスタマイズ</v-card-title>
-        <v-card-text>
-          <v-row>
-            <v-col cols="12">
-              <v-text-field
-                v-model="charaLv"
-                outlined
-                dense
-                hide-details="auto"
-                prefix="Lv."
-                @change="changeLv()"
-              />
-            </v-col>
-            <v-col cols="12">
-              <v-select
-                v-model="filterByMyUnit"
-                :items="filterByMyUnitOpt"
-                outlined
-                dense
-                label="所持状況で絞り込み"
-              ></v-select>
-            </v-col>
-          </v-row>
-        </v-card-text>
-        <v-card-actions>
-          <v-spacer />
-          <v-btn color="primary" text @click="customizeMenu = false"
-            >閉じる</v-btn
-          >
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
+    <!-- Customize menu -->
+    <UnitCustom
+      :charalv="charaLv"
+      :instincttoggle="instinct"
+      :instinctatk="instinctAtk"
+      :instincthp="instinctHp"
+      :filterbymyunit="filterByMyUnit"
+      @changeSettings="changeSettings($event, settings)"
+    />
   </v-row>
 </template>
 
@@ -101,8 +58,9 @@ export default {
       loading: true,
       search: null,
       charaLv: '30',
-      onlyMyUnits: false,
-      customizeMenu: false,
+      instinct: false,
+      instinctAtk: '0',
+      instinctHp: '0',
       headers: [
         { text: 'No.', value: 'id' },
         { text: 'ランク', value: 'rarity' },
@@ -130,7 +88,6 @@ export default {
         {
           text: '所持',
           value: 'myUnit',
-          sortable: false,
           filter: this.myUnitFilter,
         },
       ],
@@ -149,55 +106,52 @@ export default {
     }
   },
   mounted() {
-    this.loadCustomize()
+    this.charaLv = localStorage.getItem('charaLv') || '30'
+    this.instinct = localStorage.getItem('instinct') === 'true'
+    this.instinctAtk = localStorage.getItem('instinctAtk') || '0'
+    this.instinctHp = localStorage.getItem('instinctHp') || '0'
+    this.filterByMyUnit = localStorage.getItem('filterByMyUnit') || 'a'
+
     this.fetchData()
   },
   methods: {
     async fetchData() {
       this.loading = true
-      try {
-        const units = await this.$axios.$get(
-          `https://battlecats-db.vercel.app/api/unit-list?level=${this.charaLv}&instinct=false&instinct_atk=0&instinct_hp=0`
-        )
+      const units = await this.$axios.$get(
+        `https://battlecats-db.vercel.app/api/unit-list?level=${
+          this.charaLv
+        }&instinct=${this.instinct ? 'true' : 'false'}&instinct_atk=${
+          this.instinctAtk
+        }&instinct_hp=${this.instinctHp}`
+      )
 
-        const myUnits = JSON.parse(localStorage.getItem('myUnits'))
-        if (myUnits) {
-          for (const unit of units) {
-            if (myUnits.includes(unit.unitId)) {
-              unit.myUnit = true
-            }
+      const myUnits = JSON.parse(localStorage.getItem('myUnits'))
+      if (myUnits) {
+        for (const unit of units) {
+          if (myUnits.includes(unit.unitId)) {
+            unit.myUnit = true
           }
         }
-
-        this.items = units
-      } catch (e) {
-        alert(`エラーが発生しました。\n${e}`)
       }
+
+      this.items = units
       this.loading = false
     },
-    loadCustomize() {
-      this.charaLv = localStorage.getItem('charaLv') || '30'
-      this.filterByMyUnit =
-        localStorage.getItem('onlyMyUnits') === 'null'
-          ? null
-          : localStorage.getItem('onlyMyUnits') === '1'
-          ? 1
-          : localStorage.getItem('onlyMyUnits') === '2'
-          ? 2
-          : null
-    },
     myUnitFilter(value) {
-      if (!this.filterByMyUnit) {
+      if (this.filterByMyUnit === 'a') {
         return true
-      } else if (this.filterByMyUnit === 1) {
+      } else if (this.filterByMyUnit === 'y') {
         return value
-      } else if (this.filterByMyUnit === 2) {
+      } else if (this.filterByMyUnit === 'n') {
         return !value
       }
     },
-    changeLv() {
+    changeSettings(settings) {
+      for (const setting in settings) {
+        this[setting] = settings[setting]
+      }
+
       this.fetchData()
-      localStorage.setItem('charaLv', this.charaLv)
     },
   },
 }

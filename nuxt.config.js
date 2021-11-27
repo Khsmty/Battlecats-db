@@ -77,7 +77,6 @@ export default {
     },
     customVariables: [],
     theme: {
-      dark: true,
       themes: {
         dark: {
           primary: colors.blue.darken2,

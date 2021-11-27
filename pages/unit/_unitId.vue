@@ -20,7 +20,7 @@
     </v-col>
     <v-col
       v-for="result of unitData"
-      :key="result.meta.id"
+      :key="result.meta.unitId"
       cols="12"
       sm="10"
       md="9"
@@ -36,7 +36,7 @@
             </v-col>
             <v-col
               v-for="status of result.status"
-              :key="status"
+              :key="String(status)"
               cols="12"
               sm="3"
               md="3"
@@ -44,7 +44,7 @@
               <v-simple-table dense>
                 <template #default>
                   <tbody>
-                    <tr v-for="data of status" :key="data">
+                    <tr v-for="data of status" :key="String(data)">
                       <th>{{ data.title }}</th>
                       <td>{{ data.value }}</td>
                     </tr>
@@ -56,6 +56,16 @@
         </v-card-text>
       </v-card>
     </v-col>
+
+    <!-- Customize menu -->
+    <UnitCustom
+      :list="true"
+      :charalv="charaLv"
+      :instincttoggle="instinct"
+      :instinctatk="instinctAtk"
+      :instincthp="instinctHp"
+      @changeSettings="changeSettings($event, settings)"
+    />
   </v-row>
 </template>
 
@@ -64,6 +74,10 @@ export default {
   data() {
     return {
       loading: true,
+      charaLv: '30',
+      instinct: false,
+      instinctAtk: '0',
+      instinctHp: '0',
       unitData: [],
     }
   },
@@ -74,22 +88,35 @@ export default {
         .join(' / ')} - 味方キャラクター`,
     }
   },
-  async mounted() {
-    try {
-      if (String(this.$route.params.unitId).length !== 3) {
-        this.$nuxt.error({ statusCode: 404 })
-      }
+  mounted() {
+    if (String(this.$route.params.unitId).length !== 3) {
+      this.$nuxt.error({ statusCode: 404 })
+    }
 
-      const response = await this.$axios.$get(
-        `https://battlecats-db.vercel.app/api/unit-detail?level=30&instinct=false&instinct_atk=0&instinct_hp=0&id=${this.$route.params.unitId}`
+    this.charaLv = localStorage.getItem('charaLv') || '30'
+    this.instinct = localStorage.getItem('instinct') === 'true'
+    this.instinctAtk = localStorage.getItem('instinctAtk') || '0'
+    this.instinctHp = localStorage.getItem('instinctHp') || '0'
+
+    this.fetchData()
+  },
+  methods: {
+    async fetchData() {
+      this.loading = true
+      const units = await this.$axios.$get(
+        `https://battlecats-db.vercel.app/api/unit-detail?level=${
+          this.charaLv
+        }&instinct=${this.instinct ? 'true' : 'false'}&instinct_atk=${
+          this.instinctAtk
+        }&instinct_hp=${this.instinctHp}&id=${this.$route.params.unitId}`
       )
 
-      if (!response[0]) {
+      if (!units[0]) {
         this.$nuxt.error({ statusCode: 404 })
       }
 
       const unitData = []
-      for (const data of response) {
+      for (const data of units) {
         unitData.push({
           meta: {
             id: data.id,
@@ -151,10 +178,15 @@ export default {
       }
 
       this.unitData = unitData
-    } catch (e) {
-      alert(`エラーが発生しました。\n${e}`)
-    }
-    this.loading = false
+      this.loading = false
+    },
+    changeSettings(settings) {
+      for (const setting in settings) {
+        this[setting] = settings[setting]
+      }
+
+      this.fetchData()
+    },
   },
 }
 </script>

@@ -42,7 +42,6 @@
         にゃんこ大戦争db
       </v-toolbar-title>
       <v-spacer />
-      <SettingMenu />
     </v-app-bar>
     <v-main>
       <v-container>
@@ -80,6 +79,11 @@ export default {
         },
       ],
       bottomItems: [
+        {
+          icon: 'mdi-cog',
+          title: '設定',
+          to: '/settings',
+        },
         {
           icon: 'mdi-information',
           title: 'このサイトについて',
