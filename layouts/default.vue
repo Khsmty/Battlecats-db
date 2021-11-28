@@ -41,7 +41,6 @@
       <v-toolbar-title style="cursor: pointer" @click="$router.push('/')">
         にゃんこ大戦争db
       </v-toolbar-title>
-      <v-spacer />
     </v-app-bar>
     <v-main>
       <v-container>
