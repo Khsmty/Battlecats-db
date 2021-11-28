@@ -32,6 +32,7 @@
           </v-col>
           <v-col cols="12">
             <v-switch
+              v-model="instinct"
               label="本能"
               hide-details="auto"
               @change="changeSettings()"
