@@ -296,7 +296,7 @@ module.exports = function (query, res) {
 
     // コスト
     obj.cost =
-      query.instinct === 'true' && unit[133] !== 0
+      query.instinct === 'true' && unit[133] !== '0'
         ? Number(unit[133])
         : Number(unit[37])
 

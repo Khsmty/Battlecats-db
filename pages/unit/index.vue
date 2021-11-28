@@ -10,7 +10,7 @@
         outlined
         hide-details
         class="unit-search-box"
-      ></v-text-field>
+      />
 
       <v-data-table
         :headers="headers"
@@ -88,6 +88,7 @@ export default {
         {
           text: '所持',
           value: 'myUnit',
+          align: ' d-none',
           filter: this.myUnitFilter,
         },
       ],
