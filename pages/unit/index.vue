@@ -92,7 +92,7 @@ export default {
         },
       ],
       items: [],
-      filterByMyUnit: null,
+      filterByMyUnit: 'a',
       filterByMyUnitOpt: [
         { text: 'しない', value: null },
         { text: '所持キャラのみ', value: 1 },
