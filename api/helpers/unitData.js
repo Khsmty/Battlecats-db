@@ -263,7 +263,7 @@ module.exports = function (query, res) {
 
     // 移動速度
     obj.speed =
-      query.instinct === 'true' && unit[135] !== 0
+      query.instinct === 'true' && unit[135] !== '0'
         ? Number(unit[135])
         : Number(unit[29])
 
@@ -302,7 +302,7 @@ module.exports = function (query, res) {
 
     // 再生産
     obj.reproduction =
-      query.instinct === 'true' && unit[134] !== 0
+      query.instinct === 'true' && unit[134] !== '0'
         ? Number(unit[134])
         : Number(unit[38])
 
@@ -358,40 +358,40 @@ module.exports = function (query, res) {
 
     // 波動確率
     obj.waveProbability =
-      query.instinct === 'true' && unit[126] !== 0
+      query.instinct === 'true' && unit[126] !== '0'
         ? Number(unit[126])
         : Number(unit[47])
 
     // 波動レベル
     obj.waveLevel =
-      query.instinct === 'true' && unit[127] !== 0
+      query.instinct === 'true' && unit[127] !== '0'
         ? Number(unit[127])
         : Number(unit[48])
 
     // 小波動
-    obj.smallWave = unit[49] !== 0
+    obj.smallWave = unit[49] !== '0'
 
     // 烈波確率
     obj.raggingWaveProbability =
-      query.instinct === 'true' && unit[159] !== 0
+      query.instinct === 'true' && unit[159] !== '0'
         ? Number(unit[159])
         : Number(unit[50])
 
     // 烈波レベル
     obj.raggingWaveLevel =
-      query.instinct === 'true' && unit[160] !== 0
+      query.instinct === 'true' && unit[160] !== '0'
         ? Number(unit[160])
         : Number(unit[51])
 
     // 烈波射程(最短)
     obj.raggingWaveShortRange =
-      query.instinct === 'true' && unit[161] !== 0
+      query.instinct === 'true' && unit[161] !== '0'
         ? Number(unit[161])
         : Number(unit[52])
 
     // 烈波射程(最長)
     obj.raggingWaveLongRange =
-      query.instinct === 'true' && unit[162] !== 0
+      query.instinct === 'true' && unit[162] !== '0'
         ? Number(unit[162])
         : Number(unit[53])
 
@@ -399,7 +399,7 @@ module.exports = function (query, res) {
     obj.enemy = []
 
     for (let i = 0; i < 10; i++) {
-      if (unit[54 + i] !== 0) {
+      if (unit[54 + i] !== '0') {
         obj.enemy.push(
           [
             '白',
@@ -418,10 +418,10 @@ module.exports = function (query, res) {
     }
 
     // めっぽう強い
-    obj.veryStrong = unit[64] !== 0
+    obj.veryStrong = unit[64] !== '0'
 
     // 超ダメージ
-    if (query.instinct === 'true' && unit[117] !== 0) {
+    if (query.instinct === 'true' && unit[117] !== '0') {
       obj.superDamage = true
     } else if (unit[65] === 0) {
       obj.superDamage = false
@@ -430,7 +430,7 @@ module.exports = function (query, res) {
     }
 
     // 打たれ強い
-    if (query.instinct === 'true' && unit[116] !== 0) {
+    if (query.instinct === 'true' && unit[116] !== '0') {
       obj.strongToBeStruck = true
     } else if (unit[66] === 0) {
       obj.strongToBeStruck = false
@@ -439,13 +439,13 @@ module.exports = function (query, res) {
     }
 
     // 極ダメージ
-    obj.extremeDamage = unit[67] !== 0
+    obj.extremeDamage = unit[67] !== '0'
 
     // 超打たれ強い
-    obj.superStrongToBeStruck = unit[68] !== 0
+    obj.superStrongToBeStruck = unit[68] !== '0'
 
     // ふっとばす
-    if (query.instinct === 'true' && unit[118] !== 0) {
+    if (query.instinct === 'true' && unit[118] !== '0') {
       obj.butterbur = unit[118]
     } else {
       obj.butterbur = unit[69] === 0 ? false : unit[69]
