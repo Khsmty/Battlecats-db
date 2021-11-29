@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="customizeMenu" max-width="500">
+  <v-dialog v-model="customizeMenu" max-width="500" scrollable>
     <template #activator="{ on, attrs }">
       <v-btn
         color="primary"
