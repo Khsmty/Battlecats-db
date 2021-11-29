@@ -92,6 +92,7 @@
                   :items="filterByEnemyColorOpt"
                   outlined
                   dense
+                  multiple
                   hide-details="auto"
                   label="敵色で絞り込み"
                   @change="changeSettings()"
