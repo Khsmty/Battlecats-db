@@ -77,6 +77,14 @@
                 />
               </v-col>
               <v-col cols="12">
+                <v-switch
+                  v-model="andOr"
+                  :label="'AND/OR (現在: ' + (andOr ? 'OR': 'AND') + ')'"
+                  hide-details="auto"
+                  @change="changeSettings()"
+                />
+              </v-col>
+              <v-col cols="12">
                 <v-select
                   v-model="filterByEnemyColor"
                   :items="filterByEnemyColorOpt"
@@ -129,6 +137,10 @@ export default {
       type: String,
       default: 'a',
     },
+    andor: {
+      type: Boolean,
+      default: false,
+    },
     filterbyenemycolor: {
       type: Array,
       default: () => [],
@@ -147,6 +159,7 @@ export default {
         { text: '所持キャラのみ', value: 'y' },
         { text: '未所持キャラのみ', value: 'n' },
       ],
+      andOr: this.andor,
       filterByEnemyColor: this.filterbyenemycolor,
       filterByEnemyColorOpt: [
         { text: '白い敵', value: '白' },
@@ -169,7 +182,11 @@ export default {
       localStorage.setItem('instinctAtk', this.instinctAtk)
       localStorage.setItem('instinctHp', this.instinctHp)
       localStorage.setItem('filterByMyUnit', this.filterByMyUnit)
-      localStorage.setItem('filterByEnemyColor', this.filterByEnemyColor)
+      localStorage.setItem('andOr', this.andOr)
+      localStorage.setItem(
+        'filterByEnemyColor',
+        JSON.stringify(this.filterByEnemyColor)
+      )
 
       this.$emit('changeSettings', {
         charaLv: this.charaLv,
@@ -177,6 +194,7 @@ export default {
         instinctAtk: this.instinctAtk,
         instinctHp: this.instinctHp,
         filterByMyUnit: this.filterByMyUnit,
+        andOr: this.andOr,
         filterByEnemyColor: this.filterByEnemyColor,
       })
     },
