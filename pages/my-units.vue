@@ -24,6 +24,7 @@
         }"
         :loading="loading"
         :search="search"
+        :mobile-breakpoint="0"
         item-key="id"
         checkbox-color="primary"
         multi-sort
