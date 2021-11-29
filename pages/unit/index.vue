@@ -155,9 +155,9 @@ export default {
       if (this.filterByEnemyColor.length === 0) {
         return true
       } else if (this.andOr === 'o') {
-        return value.some((color) => this.filterByEnemyColor.includes(color))
+        return this.filterByEnemyColor.some((color) => value.includes(color))
       } else {
-        return value.every((color) => this.filterByEnemyColor.includes(color))
+        return this.filterByEnemyColor.every((color) => value.includes(color))
       }
     },
     changeSettings(settings) {
