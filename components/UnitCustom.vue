@@ -71,16 +71,18 @@
                   :items="filterByMyUnitOpt"
                   outlined
                   dense
-                  hide-details="auto"
                   label="所持状況で絞り込み"
                   @change="changeSettings()"
                 />
               </v-col>
               <v-col cols="12">
-                <v-switch
+                <v-select
                   v-model="andOr"
-                  :label="'AND/OR (現在: ' + (andOr ? 'OR': 'AND') + ')'"
+                  :items="andOrOpt"
+                  outlined
+                  dense
                   hide-details="auto"
+                  label="AND/OR"
                   @change="changeSettings()"
                 />
               </v-col>
@@ -90,7 +92,6 @@
                   :items="filterByEnemyColorOpt"
                   outlined
                   dense
-                  multiple
                   hide-details="auto"
                   label="敵色で絞り込み"
                   @change="changeSettings()"
@@ -135,11 +136,11 @@ export default {
     },
     filterbymyunit: {
       type: String,
-      default: 'a',
+      default: '',
     },
     andor: {
-      type: Boolean,
-      default: false,
+      type: String,
+      default: 'o',
     },
     filterbyenemycolor: {
       type: Array,
@@ -160,6 +161,10 @@ export default {
         { text: '未所持キャラのみ', value: 'n' },
       ],
       andOr: this.andor,
+      andOrOpt: [
+        { text: 'AND 検索', value: 'a' },
+        { text: 'OR 検索', value: 'o' },
+      ],
       filterByEnemyColor: this.filterbyenemycolor,
       filterByEnemyColorOpt: [
         { text: '白い敵', value: '白' },
@@ -175,18 +180,18 @@ export default {
       ],
     }
   },
+  mounted() {
+    this.charaLv = localStorage.getItem('charaLv') || '30'
+    this.instinct = localStorage.getItem('instinct') === 'true'
+    this.instinctAtk = localStorage.getItem('instinctAtk') || '0'
+    this.instinctHp = localStorage.getItem('instinctHp') || '0'
+  },
   methods: {
     changeSettings() {
       localStorage.setItem('charaLv', this.charaLv)
       localStorage.setItem('instinct', this.instinct)
       localStorage.setItem('instinctAtk', this.instinctAtk)
       localStorage.setItem('instinctHp', this.instinctHp)
-      localStorage.setItem('filterByMyUnit', this.filterByMyUnit)
-      localStorage.setItem('andOr', this.andOr)
-      localStorage.setItem(
-        'filterByEnemyColor',
-        JSON.stringify(this.filterByEnemyColor)
-      )
 
       this.$emit('changeSettings', {
         charaLv: this.charaLv,

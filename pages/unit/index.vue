@@ -102,6 +102,7 @@ export default {
       ],
       items: [],
       filterByMyUnit: 'a',
+      andOr: 'o',
       filterByEnemyColor: [],
     }
   },
@@ -115,11 +116,6 @@ export default {
     this.instinct = localStorage.getItem('instinct') === 'true'
     this.instinctAtk = localStorage.getItem('instinctAtk') || '0'
     this.instinctHp = localStorage.getItem('instinctHp') || '0'
-    this.filterByMyUnit = localStorage.getItem('filterByMyUnit') || 'a'
-    this.andOr = localStorage.getItem('andOr') === 'true' || true
-    this.filterByEnemyColor = JSON.parse(
-      localStorage.getItem('filterByEnemyColor') || '[]'
-    )
 
     this.fetchData()
   },
@@ -158,11 +154,9 @@ export default {
     enemyColorFilter(value) {
       if (this.filterByEnemyColor.length === 0) {
         return true
-      } else if (this.andOr) {
-        // OR
+      } else if (this.andOr === 'o') {
         return value.some((color) => this.filterByEnemyColor.includes(color))
       } else {
-        // AND
         return value.every((color) => this.filterByEnemyColor.includes(color))
       }
     },
