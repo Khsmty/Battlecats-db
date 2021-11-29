@@ -35,6 +35,7 @@
               v-model="instinct"
               label="本能"
               hide-details="auto"
+              style="margin-top: 0px; padding-top: 0px"
               @change="changeSettings()"
             />
           </v-col>
@@ -71,20 +72,26 @@
                   :items="filterByMyUnitOpt"
                   outlined
                   dense
+                  hide-details="auto"
                   label="所持状況で絞り込み"
                   @change="changeSettings()"
                 />
               </v-col>
               <v-col cols="12">
-                <v-select
+                <hr />
+              </v-col>
+              <v-col cols="12">
+                <v-btn-toggle
                   v-model="andOr"
-                  :items="andOrOpt"
-                  outlined
+                  color="primary"
+                  style="width: 100%; min-width: 380px"
                   dense
-                  hide-details="auto"
-                  label="AND/OR"
+                  mandatory
                   @change="changeSettings()"
-                />
+                >
+                  <v-btn value="a">AND 検索</v-btn>
+                  <v-btn value="o">OR 検索</v-btn>
+                </v-btn-toggle>
               </v-col>
               <v-col cols="12">
                 <v-select
