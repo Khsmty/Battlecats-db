@@ -1,72 +1,85 @@
 <template>
-  <v-row v-if="loading" justify="center" align="center">
-    <v-col cols="12" sm="10" md="9">
-      <v-card loading>
-        <v-card-text class="text-center">
-          データを読み込んでいます...
-        </v-card-text>
-      </v-card>
-    </v-col>
-  </v-row>
-  <v-row v-else justify="center">
-    <v-col cols="12">
-      <v-btn class="page-title" to="/unit" color="primary" nuxt rounded>
-        <v-icon>mdi-arrow-left</v-icon>&nbsp;一覧ページへ
-      </v-btn>
-      <h1 class="page-title">
-        No.{{ unitData[0].meta.id.slice(0, 3) }}
-        {{ unitData.map((d) => d.meta.name).join(' / ') }}
-      </h1>
-    </v-col>
-    <v-col
-      v-for="result of unitData"
-      :key="result.meta.unitId"
-      cols="12"
-      sm="10"
-      md="9"
-    >
-      <v-card>
-        <v-card-title class="headline">
-          {{ result.meta.id }} {{ result.meta.name }}
-        </v-card-title>
-        <v-card-text>
-          <v-row>
-            <v-col cols="12" sm="3" md="2">
-              <UnitImg :id="result.meta.id" />
-            </v-col>
-            <v-col
-              v-for="status of result.status"
-              :key="String(status)"
-              cols="12"
-              sm="3"
-              md="3"
-            >
-              <v-simple-table dense>
-                <template #default>
-                  <tbody>
-                    <tr v-for="data of status" :key="String(data)">
-                      <th>{{ data.title }}</th>
-                      <td>{{ data.value }}</td>
-                    </tr>
-                  </tbody>
-                </template>
-              </v-simple-table>
-            </v-col>
-          </v-row>
-        </v-card-text>
-      </v-card>
-    </v-col>
+  <div>
+    <v-row justify="center" align="center">
+      <v-col cols="12">
+        <v-btn class="page-title" to="/unit" color="primary" nuxt rounded>
+          <v-icon>mdi-arrow-left</v-icon>&nbsp;一覧ページへ
+        </v-btn>
+      </v-col>
+    </v-row>
+    <v-row v-if="loading" justify="center" align="center">
+      <v-col cols="12" sm="10" md="9">
+        <v-card loading>
+          <v-card-text class="text-center">
+            データを読み込んでいます...
+          </v-card-text>
+        </v-card>
+      </v-col>
+    </v-row>
+    <v-row v-else justify="center">
+      <v-col cols="12">
+        <h1 class="page-title">
+          No.{{ unitData[0].meta.id.slice(0, 3) }}
+          {{ unitData.map((d) => d.meta.name).join(' / ') }}
+        </h1>
+      </v-col>
+      <v-col v-if="loading" cols="12" sm="10" md="9">
+        <v-card loading>
+          <v-card-text class="text-center">
+            データを読み込んでいます...
+          </v-card-text>
+        </v-card>
+      </v-col>
+      <v-col
+        v-for="result of unitData"
+        :key="result.meta.unitId"
+        cols="12"
+        sm="10"
+        md="9"
+      >
+        <v-card>
+          <v-card-title class="headline">
+            {{ result.meta.id }} {{ result.meta.name }}
+          </v-card-title>
+          <v-card-text>
+            <v-row>
+              <v-col cols="12" sm="3" md="2">
+                <UnitImg :id="result.meta.id" />
+              </v-col>
+              <v-col
+                v-for="status of result.status"
+                :key="String(status)"
+                cols="12"
+                sm="3"
+                md="3"
+              >
+                <v-simple-table dense>
+                  <template #default>
+                    <tbody>
+                      <tr v-for="data of status" :key="String(data)">
+                        <th>{{ data.title }}</th>
+                        <td>{{ data.value }}</td>
+                      </tr>
+                    </tbody>
+                  </template>
+                </v-simple-table>
+              </v-col>
+            </v-row>
+          </v-card-text>
+        </v-card>
+      </v-col>
 
-    <!-- Customize menu -->
-    <UnitCustom
-      :list="true"
-      :charalv="charaLv"
-      :instincttoggle="instinct"
-      :instinctatk="instinctAtk"
-      :instincthp="instinctHp"
-      @changeSettings="changeSettings($event, settings)"
-    />
-  </v-row>
+      <!-- Customize menu -->
+      <UnitCustom
+        :list="true"
+        :charalv="charaLv"
+        :instincttoggle="instinct"
+        :instinctatk="instinctAtk"
+        :instincthp="instinctHp"
+        @changeSettings="changeSettings($event, settings)"
+      />
+    </v-row>
+  </div>
 </template>
 
 <script>

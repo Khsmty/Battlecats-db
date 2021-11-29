@@ -46,6 +46,7 @@
       :instinctatk="instinctAtk"
       :instincthp="instinctHp"
       :filterbymyunit="filterByMyUnit"
+      :filterbyenemycolor="filterByEnemyColor"
       @changeSettings="changeSettings($event, settings)"
     />
   </v-row>
@@ -91,14 +92,16 @@ export default {
           align: ' d-none',
           filter: this.myUnitFilter,
         },
+        {
+          text: '色',
+          value: 'enemy',
+          align: ' d-none',
+          filter: this.enemyColorFilter,
+        },
       ],
       items: [],
       filterByMyUnit: 'a',
-      filterByMyUnitOpt: [
-        { text: 'しない', value: null },
-        { text: '所持キャラのみ', value: 1 },
-        { text: '未所持キャラのみ', value: 2 },
-      ],
+      filterByEnemyColor: [],
     }
   },
   head() {
@@ -112,6 +115,9 @@ export default {
     this.instinctAtk = localStorage.getItem('instinctAtk') || '0'
     this.instinctHp = localStorage.getItem('instinctHp') || '0'
     this.filterByMyUnit = localStorage.getItem('filterByMyUnit') || 'a'
+    this.filterByEnemyColor = JSON.parse(
+      localStorage.getItem('filterByEnemyColor') || '[]'
+    )
 
     this.fetchData()
   },
@@ -145,6 +151,13 @@ export default {
         return value
       } else if (this.filterByMyUnit === 'n') {
         return !value
+      }
+    },
+    enemyColorFilter(value) {
+      if (this.filterByEnemyColor.length === 0) {
+        return true
+      } else {
+        return value.some((color) => this.filterByEnemyColor.includes(color))
       }
     },
     changeSettings(settings) {

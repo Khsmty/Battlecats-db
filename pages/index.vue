@@ -36,7 +36,7 @@
                 </tbody>
               </template>
             </v-simple-table>
-            <v-skeleton-loader v-else type="table-tbody" />
+            <v-skeleton-loader v-else type="list-item-three-line" />
           </v-card-text>
           <v-card-actions>
             <v-spacer />

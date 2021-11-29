@@ -76,6 +76,18 @@
                   @change="changeSettings()"
                 />
               </v-col>
+              <v-col cols="12">
+                <v-select
+                  v-model="filterByEnemyColor"
+                  :items="filterByEnemyColorOpt"
+                  outlined
+                  dense
+                  multiple
+                  hide-details="auto"
+                  label="敵色で絞り込み"
+                  @change="changeSettings()"
+                />
+              </v-col>
             </v-row>
           </v-col>
         </v-row>
@@ -117,6 +129,10 @@ export default {
       type: String,
       default: 'a',
     },
+    filterbyenemycolor: {
+      type: Array,
+      default: () => [],
+    },
   },
   data() {
     return {
@@ -131,15 +147,29 @@ export default {
         { text: '所持キャラのみ', value: 'y' },
         { text: '未所持キャラのみ', value: 'n' },
       ],
+      filterByEnemyColor: this.filterbyenemycolor,
+      filterByEnemyColorOpt: [
+        { text: '白い敵', value: '白' },
+        { text: '赤い敵', value: '赤' },
+        { text: '浮いてる敵', value: '浮' },
+        { text: '黒い敵', value: '黒' },
+        { text: 'メタルな敵', value: 'メタル' },
+        { text: '天使', value: '天使' },
+        { text: 'エイリアン', value: 'エイリアン' },
+        { text: 'ゾンビ', value: 'ゾンビ' },
+        { text: '古代', value: '古代' },
+        { text: '悪魔', value: '悪魔' },
+      ],
     }
   },
   methods: {
     changeSettings() {
       localStorage.setItem('charaLv', this.charaLv)
-      localStorage.setItem('filterByMyUnit', this.filterByMyUnit)
       localStorage.setItem('instinct', this.instinct)
       localStorage.setItem('instinctAtk', this.instinctAtk)
       localStorage.setItem('instinctHp', this.instinctHp)
+      localStorage.setItem('filterByMyUnit', this.filterByMyUnit)
+      localStorage.setItem('filterByEnemyColor', this.filterByEnemyColor)
 
       this.$emit('changeSettings', {
         charaLv: this.charaLv,
@@ -147,6 +177,7 @@ export default {
         instinctAtk: this.instinctAtk,
         instinctHp: this.instinctHp,
         filterByMyUnit: this.filterByMyUnit,
+        filterByEnemyColor: this.filterByEnemyColor,
       })
     },
   },
