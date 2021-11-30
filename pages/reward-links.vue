@@ -83,6 +83,7 @@ export default {
         { name: 'にゃんこクエスト 3', link: 'nyanko9_jp3' },
         { name: 'にゃんこクエスト 4', link: 'nyanko9_jp4' },
         { name: 'にゃんこクエスト 5', link: 'nyanko9_jp5' },
+        { name: 'にゃんこ大泥棒', link: 'odorobo1' },
         { name: '? 1', link: 'fbq9bcp9' },
         { name: '? 2', link: 'hld7058h' },
         { name: '? 3', link: 'blakb4cs' },
@@ -90,7 +91,6 @@ export default {
         { name: '? 5', link: 'fightclub1' },
         { name: '? 6', link: 'fightclub2' },
         { name: '? 7', link: 'fightclub3' },
-        { name: '? 8', link: 'odorobo1' },
       ],
     }
   },
