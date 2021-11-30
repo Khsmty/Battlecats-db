@@ -4,7 +4,7 @@
       <h1 class="page-title">報酬リンク集</h1>
     </v-col>
     <v-col v-for="item of items" :key="item.name" cols="12" sm="10" md="9">
-      <v-card :href="'ponos-battlecats4a://ponos/' + item.link">
+      <v-card :href="'ponos-battlecats4://ponos/' + item.link">
         <v-card-title>{{ item.name }}</v-card-title>
       </v-card>
     </v-col>
