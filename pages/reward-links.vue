@@ -18,7 +18,7 @@ export default {
       items: [
         { name: 'アンケート特典 1', link: 'enquete/1/r89kqiua' },
         { name: 'アンケート特典 2', link: 'enquete/3/qgh1f1ow' },
-        { name: 'アンケート特典 3', link: 'enquete/4/m7folog1' },
+        { name: 'アンケート特典 3', link: 'enquete/4/m7fsiqg4' },
         { name: 'アンケート特典 4', link: 'enquete/5/m7fsiqg4' },
         { name: 'アンケート特典 5', link: 'enquete/6/g8pm7whi' },
         { name: 'アンケート特典 6', link: 'enquete/7/f5eiwyq7' },
