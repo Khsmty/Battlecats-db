@@ -14,11 +14,6 @@ export default {
         name: 'description',
         content: 'にゃんこ大戦争のデータをまとめています。',
       },
-      {
-        hid: 'og:title',
-        property: 'og:title',
-        content: '%s',
-      },
       { name: 'format-detection', content: 'telephone=no' },
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/icon.png' }],

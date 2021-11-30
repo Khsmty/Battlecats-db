@@ -6,6 +6,7 @@
     <v-col v-for="item of items" :key="item.name" cols="12" sm="10" md="9">
       <v-card :href="'ponos-battlecats4://ponos/' + item.link">
         <v-card-title>{{ item.name }}</v-card-title>
+        <v-card-text>取得: {{ item.drop }}</v-card-text>
       </v-card>
     </v-col>
   </v-row>
@@ -16,7 +17,7 @@ export default {
   data() {
     return {
       items: [
-        { name: 'アンケート特典 1', link: 'enquete/1/r89kqiua' },
+        { name: 'アンケート特典 1', link: 'enquete/1/r89kqiua', drop: 'ネコカン50個' },
         { name: 'アンケート特典 2', link: 'enquete/3/qgh1f1ow' },
         { name: 'アンケート特典 3', link: 'enquete/4/m7fsiqg4' },
         { name: 'アンケート特典 4', link: 'enquete/5/m7fsiqg4' },
