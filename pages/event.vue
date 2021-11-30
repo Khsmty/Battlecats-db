@@ -43,7 +43,7 @@
                 </tbody>
               </template>
             </v-simple-table>
-            <v-skeleton-loader v-else class="mx-auto" type="table-tbody" />
+            <v-skeleton-loader v-else class="mx-auto" type="list-item-three-line" />
           </v-card-text>
         </v-card>
       </v-col>

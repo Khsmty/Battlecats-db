@@ -22,6 +22,7 @@
         }"
         :loading="loading"
         :search="search"
+        :mobile-breakpoint="0"
         multi-sort
         locale="ja-JP"
         loading-text="データを読み込んでいます..."
