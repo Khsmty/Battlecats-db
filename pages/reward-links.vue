@@ -89,9 +89,9 @@ export default {
         { name: 'ファイトクラブ 2', link: 'fightclub2', drop: 'ネコカン 100個' },
         { name: 'ファイトクラブ 3', link: 'fightclub3', drop: 'にゃんこチケット 1枚' },
         { name: 'ハニートーストカフェ', link: 'pasela1', drop: 'ハニトンくん' },
+        { name: 'キャットバスターズ', link: 'blakb4cs', drop: 'ネコ博士' },
         { name: '? 1', link: 'fbq9bcp9', drop: 'ネコカン 50個' },
         { name: '? 2', link: 'hld7058h', drop: 'レアチケット 1枚' },
-        { name: '? 3', link: 'blakb4cs', drop: 'ネコ博士' },
       ],
     }
   },
