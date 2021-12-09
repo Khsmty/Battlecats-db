@@ -71,11 +71,6 @@ export default {
           title: 'イベントカレンダー',
           to: '/event',
         },
-        {
-          icon: 'mdi-account-multiple',
-          title: '所持キャラ選択',
-          to: '/my-units',
-        },
       ],
       bottomItems: [
         {

@@ -77,12 +77,14 @@ export default {
       this.$refs.form.validate()
 
       this.sending = true
-      this.$axios.$get(
-        `https://docs.google.com/forms/u/0/d/e/1FAIpQLSeHgB6Sj5zw5kO8Fju8rH5mjHxzGUHeJk2yT8X-UyxfceiWsA/formResponse?entry.1555029440=${this.name}&entry.2097340096=${this.email}&entry.1445046543=${this.message}`
-      ).finally(() => {
-        this.sending = false
-        this.sended = true
-      })
+      this.$axios
+        .$get(
+          `https://docs.google.com/forms/u/0/d/e/1FAIpQLSeHgB6Sj5zw5kO8Fju8rH5mjHxzGUHeJk2yT8X-UyxfceiWsA/formResponse?entry.1555029440=${this.name}&entry.2097340096=${this.email}&entry.1445046543=${this.message}`
+        )
+        .finally(() => {
+          this.sending = false
+          this.sended = true
+        })
     },
   },
 }

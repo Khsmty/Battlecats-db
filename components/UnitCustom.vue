@@ -16,8 +16,10 @@
     </template>
 
     <v-card>
-      <v-card-title>カスタマイズ</v-card-title>
-      <v-card-text>
+      <v-card-title class="font-weight-bold headline pb-10">
+        カスタマイズ
+        </v-card-title>
+      <v-card-subtitle>
         <v-row>
           <v-col cols="12">
             <v-text-field
@@ -67,20 +69,6 @@
                 <hr />
               </v-col>
               <v-col cols="12">
-                <v-select
-                  v-model="filterByMyUnit"
-                  :items="filterByMyUnitOpt"
-                  outlined
-                  dense
-                  hide-details="auto"
-                  label="所持状況で絞り込み"
-                  @change="changeSettings()"
-                />
-              </v-col>
-              <v-col cols="12">
-                <hr />
-              </v-col>
-              <v-col cols="12">
                 <v-btn-toggle
                   v-model="andOr"
                   color="primary"
@@ -89,8 +77,8 @@
                   mandatory
                   @change="changeSettings()"
                 >
-                  <v-btn value="a">AND 検索</v-btn>
-                  <v-btn value="o">OR 検索</v-btn>
+                  <v-btn value="a">AND検索</v-btn>
+                  <v-btn value="o">OR検索</v-btn>
                 </v-btn-toggle>
               </v-col>
               <v-col cols="12">
@@ -108,10 +96,10 @@
             </v-row>
           </v-col>
         </v-row>
-      </v-card-text>
+      </v-card-subtitle>
       <v-card-actions>
         <v-spacer />
-        <v-btn color="primary" text @click="customizeMenu = false">
+        <v-btn color="primary" depressed @click="customizeMenu = false">
           閉じる
         </v-btn>
       </v-card-actions>
@@ -142,10 +130,6 @@ export default {
       type: String,
       required: true,
     },
-    filterbymyunit: {
-      type: String,
-      default: '',
-    },
     andor: {
       type: String,
       default: 'o',
@@ -162,12 +146,6 @@ export default {
       instinct: this.instincttoggle,
       instinctAtk: this.instinctatk,
       instinctHp: this.instincthp,
-      filterByMyUnit: this.filterbymyunit,
-      filterByMyUnitOpt: [
-        { text: 'しない', value: 'a' },
-        { text: '所持キャラのみ', value: 'y' },
-        { text: '未所持キャラのみ', value: 'n' },
-      ],
       andOr: this.andor,
       andOrOpt: [
         { text: 'AND 検索', value: 'a' },
@@ -206,7 +184,6 @@ export default {
         instinct: this.instinct,
         instinctAtk: this.instinctAtk,
         instinctHp: this.instinctHp,
-        filterByMyUnit: this.filterByMyUnit,
         andOr: this.andOr,
         filterByEnemyColor: this.filterByEnemyColor,
       })

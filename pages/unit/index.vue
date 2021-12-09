@@ -4,10 +4,11 @@
       <h1 class="page-title">味方キャラステータス</h1>
       <v-text-field
         v-model="search"
-        append-icon="mdi-magnify"
-        label="キャラクターを検索"
+        prepend-inner-icon="mdi-magnify"
+        label="キャラクター検索"
         placeholder="キャラクター名やステータスを入力..."
         outlined
+        clearable
         hide-details
         class="unit-search-box"
       />
@@ -46,7 +47,6 @@
       :instincttoggle="instinct"
       :instinctatk="instinctAtk"
       :instincthp="instinctHp"
-      :filterbymyunit="filterByMyUnit"
       :andor="andOr"
       :filterbyenemycolor="filterByEnemyColor"
       @changeSettings="changeSettings($event, settings)"
@@ -89,12 +89,6 @@ export default {
         { text: 'コスト', value: 'cost' },
         { text: '再生産F', value: 'reproduction' },
         {
-          text: '所持',
-          value: 'myUnit',
-          align: ' d-none',
-          filter: this.myUnitFilter,
-        },
-        {
           text: '色',
           value: 'enemy',
           align: ' d-none',
@@ -102,7 +96,6 @@ export default {
         },
       ],
       items: [],
-      filterByMyUnit: 'a',
       andOr: 'o',
       filterByEnemyColor: [],
     }
@@ -142,15 +135,6 @@ export default {
 
       this.items = units
       this.loading = false
-    },
-    myUnitFilter(value) {
-      if (this.filterByMyUnit === 'a') {
-        return true
-      } else if (this.filterByMyUnit === 'y') {
-        return value
-      } else if (this.filterByMyUnit === 'n') {
-        return !value
-      }
     },
     enemyColorFilter(value) {
       if (this.filterByEnemyColor.length === 0) {
