@@ -9,6 +9,7 @@
         placeholder="キャラクター名やステータスを入力..."
         outlined
         clearable
+        clear-icon="mdi-close-circle"
         hide-details
         class="unit-search-box"
       />
@@ -39,6 +40,8 @@
           }}</nuxt-link>
         </template>
       </v-data-table>
+
+      <v-sheet height="50"></v-sheet>
     </v-col>
 
     <!-- Customize menu -->
