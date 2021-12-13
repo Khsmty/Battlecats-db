@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="customizeMenu" max-width="500" scrollable>
+  <v-dialog v-model="dialog" max-width="500" scrollable>
     <template #activator="{ on, attrs }">
       <v-btn
         color="primary"
@@ -18,7 +18,7 @@
     <v-card>
       <v-card-title class="font-weight-bold headline pb-10">
         カスタマイズ
-        </v-card-title>
+      </v-card-title>
       <v-card-subtitle>
         <v-row>
           <v-col cols="12">
@@ -63,43 +63,11 @@
               @change="changeSettings()"
             />
           </v-col>
-          <v-col v-if="!list" cols="12">
-            <v-row>
-              <v-col cols="12">
-                <hr />
-              </v-col>
-              <v-col cols="12">
-                <v-btn-toggle
-                  v-model="andOr"
-                  color="primary"
-                  style="width: 100%; min-width: 380px"
-                  dense
-                  mandatory
-                  @change="changeSettings()"
-                >
-                  <v-btn value="a">AND検索</v-btn>
-                  <v-btn value="o">OR検索</v-btn>
-                </v-btn-toggle>
-              </v-col>
-              <v-col cols="12">
-                <v-select
-                  v-model="filterByEnemyColor"
-                  :items="filterByEnemyColorOpt"
-                  outlined
-                  dense
-                  multiple
-                  hide-details="auto"
-                  label="敵色で絞り込み"
-                  @change="changeSettings()"
-                />
-              </v-col>
-            </v-row>
-          </v-col>
         </v-row>
       </v-card-subtitle>
       <v-card-actions>
         <v-spacer />
-        <v-btn color="primary" depressed @click="customizeMenu = false">
+        <v-btn color="primary" depressed @click="dialog = false">
           閉じる
         </v-btn>
       </v-card-actions>
@@ -110,10 +78,6 @@
 <script>
 export default {
   props: {
-    list: {
-      type: Boolean,
-      default: false,
-    },
     charalv: {
       type: String,
       required: true,
@@ -130,40 +94,14 @@ export default {
       type: String,
       required: true,
     },
-    andor: {
-      type: String,
-      default: 'o',
-    },
-    filterbyenemycolor: {
-      type: Array,
-      default: () => [],
-    },
   },
   data() {
     return {
-      customizeMenu: false,
+      dialog: false,
       charaLv: this.charalv,
       instinct: this.instincttoggle,
       instinctAtk: this.instinctatk,
       instinctHp: this.instincthp,
-      andOr: this.andor,
-      andOrOpt: [
-        { text: 'AND 検索', value: 'a' },
-        { text: 'OR 検索', value: 'o' },
-      ],
-      filterByEnemyColor: this.filterbyenemycolor,
-      filterByEnemyColorOpt: [
-        { text: '白い敵', value: '白' },
-        { text: '赤い敵', value: '赤' },
-        { text: '浮いてる敵', value: '浮' },
-        { text: '黒い敵', value: '黒' },
-        { text: 'メタルな敵', value: 'メタル' },
-        { text: '天使', value: '天使' },
-        { text: 'エイリアン', value: 'エイリアン' },
-        { text: 'ゾンビ', value: 'ゾンビ' },
-        { text: '古代', value: '古代' },
-        { text: '悪魔', value: '悪魔' },
-      ],
     }
   },
   mounted() {
@@ -184,8 +122,6 @@ export default {
         instinct: this.instinct,
         instinctAtk: this.instinctAtk,
         instinctHp: this.instinctHp,
-        andOr: this.andOr,
-        filterByEnemyColor: this.filterByEnemyColor,
       })
     },
   },

@@ -14,6 +14,17 @@
         class="unit-search-box"
       />
 
+      <!-- Search menu -->
+      <UnitSearchMenu
+        :charalv="charaLv"
+        :instincttoggle="instinct"
+        :instinctatk="instinctAtk"
+        :instincthp="instinctHp"
+        :andor="andOr"
+        :filterbyenemycolor="filterByEnemyColor"
+        @changeSettings="changeSettings($event, settings)"
+      />
+
       <v-data-table
         :headers="headers"
         :items="items"
@@ -41,11 +52,11 @@
         </template>
       </v-data-table>
 
-      <v-sheet height="50"></v-sheet>
+      <v-sheet height="50" />
     </v-col>
 
     <!-- Customize menu -->
-    <UnitCustom
+    <UnitCustomMenu
       :charalv="charaLv"
       :instincttoggle="instinct"
       :instinctatk="instinctAtk"

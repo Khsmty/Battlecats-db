@@ -70,7 +70,7 @@
       </v-col>
 
       <!-- Customize menu -->
-      <UnitCustom
+      <UnitCustomMenu
         :list="true"
         :charalv="charaLv"
         :instincttoggle="instinct"
