@@ -151,7 +151,7 @@ export default {
               },
               {
                 title: '攻撃範囲',
-                value: data.range,
+                value: data.reach,
               },
             ],
             [
@@ -165,7 +165,7 @@ export default {
               },
               {
                 title: '射程',
-                value: data.reach,
+                value: data.range,
               },
               {
                 title: 'コスト',
