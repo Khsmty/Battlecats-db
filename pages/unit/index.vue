@@ -138,15 +138,6 @@ export default {
         }&instinct_hp=${this.instinctHp}`
       )
 
-      const myUnits = JSON.parse(localStorage.getItem('myUnits'))
-      if (myUnits) {
-        for (const unit of units) {
-          if (myUnits.includes(unit.unitId)) {
-            unit.myUnit = true
-          }
-        }
-      }
-
       this.items = units
       this.loading = false
     },
